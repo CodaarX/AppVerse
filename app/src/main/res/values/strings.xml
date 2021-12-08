@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">N26_P3_usecase</string>
+    <string name="app_name">Dev Jokes</string>
+    <string name="welcome_to_jokeverse">Welcome to Jokeverse</string>
+    <string name="click_the_button_below_to_begin">Click the button to begin!</string>
+    <string name="get_jokes">Get jokes</string>
+    <string name="error_message">error message</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

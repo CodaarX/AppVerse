@@ -1,0 +1,37 @@
+package com.decagon.n26_p3_usecase.core.baseClasses
+
+import com.decagon.n26_p3_usecase.commons.utils.Resource
+import com.decagon.n26_p3_usecase.core.domain.model.jokesModel.JokeModelRaw
+import com.decagon.n26_p3_usecase.core.domain.model.jokesModel.toJokesModelSafe
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import retrofit2.Response
+
+abstract class BaseRepositoryOperation {
+    suspend fun <T> getData (apiCall: suspend () -> Response<T>) : Flow<Resource<T>> =
+
+            flow {
+                emit (
+                    try {
+                        Resource.Loading<String>("Loading")
+
+                        val response = apiCall.invoke()
+                        val result = response.body()
+
+                        if (result != null && response.isSuccessful) {
+                            when (result) {
+                               is JokeModelRaw -> Resource.Success<T>(result.toJokesModelSafe() as T)
+
+                                else -> Resource.Empty()
+                            }
+                         } else {
+                            Resource.Error(response.message())
+                        }
+                    } catch (e: Exception) {
+                        Resource.Error(e.localizedMessage ?: "an error occurred")
+                    }
+                )
+            }
+
+
+}

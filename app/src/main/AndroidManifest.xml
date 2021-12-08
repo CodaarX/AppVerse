@@ -2,19 +2,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.decagon.n26_p3_usecase">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MainApplication"
+        android:name=".app.MainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.N26_P3_usecase">
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <activity
-            android:name=".presentation.viewController.MainActivity"
-            android:exported="true">
+            android:name="com.decagon.n26_p3_usecase.core.baseClasses.BaseActivity"
+            android:exported="true" />
+        <activity
+            android:name=".features.qrCode.QRCodeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".core.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".features.splashScreen.SplashScreenActivity"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

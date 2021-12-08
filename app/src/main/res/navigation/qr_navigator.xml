@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/qr_navigator"
+    app:startDestination="@id/QRGeneratorFragment">
+
+    <fragment
+        android:id="@+id/QRGeneratorFragment"
+        android:name="com.decagon.n26_p3_usecase.features.qrCode.generator.presentation.QRGeneratorFragment"
+        android:label="fragment_q_r_generator"
+        tools:layout="@layout/fragment_q_r_generator" />
+    <fragment
+        android:id="@+id/QRReaderFragment"
+        android:name="com.decagon.n26_p3_usecase.features.qrCode.reader.QRReaderFragment"
+        android:label="fragment_q_r_reader"
+        tools:layout="@layout/fragment_q_r_reader" />
+</navigation>

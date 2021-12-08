@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigator"
+    app:startDestination="@id/programmingJokesFragment">
+
+    <fragment
+        android:id="@+id/programmingJokesFragment"
+        android:name="com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewController.ProgrammingJokesFragment"
+        android:label="fragment_programming_jokes"
+        tools:layout="@layout/fragment_programming_jokes" />
+    <fragment
+        android:id="@+id/onlineRadioFragment"
+        android:name="com.decagon.n26_p3_usecase.features.onlineRadio.presentation.OnlineRadioFragment"
+        android:label="fragment_online_radio"
+        tools:layout="@layout/fragment_online_radio" >
+        <action
+            android:id="@+id/action_onlineRadioFragment_pop"
+            app:enterAnim="@anim/animate_fade_enter"
+            app:exitAnim="@anim/animate_fade_exit"
+            app:popUpTo="@id/onlineRadioFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <include app:graph="@navigation/qr_navigator" />
+
+</navigation>
