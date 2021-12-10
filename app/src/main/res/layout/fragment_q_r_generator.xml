@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/blue_grey_900"
     android:orientation="vertical"
-    tools:context=".features.qrCode.generator.presentation.QRGeneratorFragment">
+    tools:context=".features.qrCode.encoder.presentation.QRGeneratorFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

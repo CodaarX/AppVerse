@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/QRGeneratorFragment"
-        android:name="com.decagon.n26_p3_usecase.features.qrCode.generator.presentation.QRGeneratorFragment"
+        android:name="com.decagon.n26_p3_usecase.features.qrCode.encoder.presentation.QRGeneratorFragment"
         android:label="fragment_q_r_generator"
         tools:layout="@layout/fragment_q_r_generator" />
     <fragment
         android:id="@+id/QRReaderFragment"
-        android:name="com.decagon.n26_p3_usecase.features.qrCode.reader.QRReaderFragment"
+        android:name="com.decagon.n26_p3_usecase.features.qrCode.decoder.presentation.QRReaderFragment"
         android:label="fragment_q_r_reader"
         tools:layout="@layout/fragment_q_r_reader" />
 </navigation>

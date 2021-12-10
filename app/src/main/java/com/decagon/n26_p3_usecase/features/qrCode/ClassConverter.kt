@@ -1,5 +1,6 @@
 package com.decagon.n26_p3_usecase.features.qrCode
 
+import com.decagon.n26_p3_usecase.commons.utils.log
 import com.google.gson.Gson
 
 object ClassConverter {
@@ -8,5 +9,9 @@ object ClassConverter {
 
     fun <T> toJson(value: T): String = gson.toJson(value)
 
-    inline fun <reified T> toClass(value: String, dataClass: T) = gson.fromJson(value, T::class.java)
+    inline fun <reified T> toClass(value: String, dataClass: T): T {
+
+        return gson.fromJson(value, dataClass!!::class.java)
+    }
+
 }
