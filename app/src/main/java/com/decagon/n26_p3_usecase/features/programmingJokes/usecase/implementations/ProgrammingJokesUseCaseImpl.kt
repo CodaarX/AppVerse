@@ -26,6 +26,8 @@ class ProgrammingJokesUseCaseImpl  @Inject constructor(private val jokesReposito
 
                     if (result != null && response.isSuccessful) {
                         Resource.Success<JokesModelSafe>(result.toJokesModelSafe())
+
+
                     } else {
                         Resource.Error(response.message())
                     }

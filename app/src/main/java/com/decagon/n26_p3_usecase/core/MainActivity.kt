@@ -8,19 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
-import com.decagon.n26_p3_usecase.databinding.ActivityMainBinding
 import com.decagon.n26_p3_usecase.commons.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import android.widget.LinearLayout
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.animations.ViewAnimation
+import com.decagon.n26_p3_usecase.databinding.ActivityMainBinding
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -38,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
+
         val window: Window = window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = resources.getColor(R.color.app_color)
@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initNavigationMenu()
         initNavController()
-
 //      Color.BLUE
 //      val bar: android.app.ActionBar? = actionBar
 //      bar?.setBackgroundDrawable(ColorDrawable(Color.rgb(19,48,81)))
@@ -56,10 +55,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+
+
     private fun initToolbar() {
         toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
         toolbar.navigationIcon!!.setColorFilter(
-            resources.getColor(R.color.blue_700),
+            resources.getColor(R.color.white),
             PorterDuff.Mode.SRC_ATOP
         )
         setSupportActionBar(toolbar)
@@ -67,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar!!.setHomeButtonEnabled(true)
         actionBar!!.title = "Tool Box"
-    }
+}
 
     private fun initNavigationMenu() {
 
@@ -90,6 +92,10 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
+    }
+
+    private fun navigateTo(destination: Int) {
+        navController.navigate(destination)
     }
 
     private fun hideMenu(view: View): ObjectAnimator? {
@@ -116,7 +122,8 @@ class MainActivity : AppCompatActivity() {
         binding?.menuLinear?.visibility = View.VISIBLE
         isHide = false
         view.animate()
-            .scaleX(0.9f).scaleY(0.9f)
+            .scaleX(0.9f)
+            .scaleY(0.9f)
             .translationX(view.width / 2f)
             .setDuration(1000)
             .setListener(object : AnimatorListenerAdapter() {
@@ -147,8 +154,10 @@ class MainActivity : AppCompatActivity() {
 
     fun onMenuClick(view: View?) {
         when (view) {
-            binding?.radioFeature -> navController.navigate(R.id.onlineRadioFragment)
-            binding?.barCodeFeature -> navController.navigate(R.id.qr_navigator)
+            binding?.radioFeature -> navigateTo(R.id.onlineRadioFragment)
+            binding?.barCodeFeature -> navigateTo(R.id.qr_navigator)
+            binding?.alarmFeature -> navigateTo(R.id.alarmFragment)
+            binding?.todoFeature -> navigateTo(R.id.todo_navigation)
 
             else -> navController.navigate(R.id.programmingJokesFragment)
         }

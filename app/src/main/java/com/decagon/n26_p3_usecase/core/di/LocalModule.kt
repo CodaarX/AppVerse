@@ -2,8 +2,10 @@ package com.decagon.n26_p3_usecase.core.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
 import com.decagon.n26_p3_usecase.commons.utils.Constants.SHARED_PREFS
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
+import com.decagon.n26_p3_usecase.core.data.local.AppVerseDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +17,17 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object LocalModule {
+
+    @Singleton
+    @Provides
+    fun provideApplicationDatabase(@ApplicationContext context: Context): AppVerseDatabase {
+        return Room.databaseBuilder(context, AppVerseDatabase::class.java,
+            AppVerseDatabase.DATABASE_NAME
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
     @Singleton
     @Provides
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {

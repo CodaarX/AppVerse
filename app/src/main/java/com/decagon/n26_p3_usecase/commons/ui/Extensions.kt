@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentActivity
 import com.decagon.n26_p3_usecase.R
 import com.google.android.material.snackbar.Snackbar
 
@@ -35,3 +36,4 @@ fun View.hideView(){
 fun View.showView(){
     visibility = View.VISIBLE
 }
+

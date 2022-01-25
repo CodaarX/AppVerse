@@ -16,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class JokeViewModel @Inject constructor(
     private val anyJokesUseCase: AnyJokesUseCase,
+
     private val programmingJokesUseCase: ProgrammingJokesUseCase
     ) : ViewModel() {
 

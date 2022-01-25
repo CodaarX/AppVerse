@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/bottom_cordinator"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp"
+        tools:context=".features.todo.presentation.viewController.AddTodoFragment">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/to_to_add_title"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@drawable/custom_input"
+            android:paddingStart="24dp"
+            android:ems="15"
+            android:hint="Title"
+            android:paddingEnd="24dp"
+            android:inputType="textCapCharacters"
+            app:layout_constraintBottom_toTopOf="@id/to_do_add_priority_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/to_do_add_priority_spinner"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/priorities"
+            android:paddingStart="20dp"
+            android:pointerIcon="arrow"
+            android:paddingEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@id/to_do_add_edit_text"
+            android:background="@drawable/spinner_drop_down"
+            app:layout_constraintEnd_toEndOf="@+id/to_to_add_title"
+            app:layout_constraintStart_toStartOf="@+id/to_to_add_title"
+            app:layout_constraintTop_toBottomOf="@+id/to_to_add_title" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/to_do_add_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ems="10"
+            android:layout_marginTop="8dp"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:hint="Description"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="16dp"
+            android:layout_marginBottom="70dp"
+
+            android:background="@drawable/custom_input"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/to_do_add_priority_spinner"
+            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintStart_toStartOf="@+id/to_do_add_priority_spinner"
+            app:layout_constraintTop_toBottomOf="@+id/to_do_add_priority_spinner" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+    android:id="@+id/bar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_gravity="bottom"
+    android:contentInsetStart="0dp"
+    android:contentInsetLeft="0dp"
+    android:backgroundTint="#1976D2"
+    android:contentInsetEnd="0dp"
+    android:contentInsetRight="0dp"
+    android:gravity="center"
+    app:contentInsetEnd="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetStart="0dp"
+    app:fabAlignmentMode="center"
+    app:hideOnScroll="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.google.android.material.bottomappbar.BottomAppBar>
+
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/add_note_fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/app_color"
+    android:clickable="true"
+    android:focusable="true"
+    app:srcCompat="@drawable/ic_baseline_add_24"
+    app:tint="@color/white"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:fabSize="normal"
+    app:layout_anchor="@id/bar"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

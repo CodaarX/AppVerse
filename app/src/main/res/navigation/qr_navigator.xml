@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/qr_navigator"
-    app:startDestination="@id/QRGeneratorFragment">
+    app:startDestination="@id/QROptionsFragment">
 
     <fragment
         android:id="@+id/QRGeneratorFragment"
@@ -15,4 +15,9 @@
         android:name="com.decagon.n26_p3_usecase.features.qrCode.decoder.presentation.QRReaderFragment"
         android:label="fragment_q_r_reader"
         tools:layout="@layout/fragment_q_r_reader" />
+    <fragment
+        android:id="@+id/QROptionsFragment"
+        android:name="com.decagon.n26_p3_usecase.features.qrCode.QROptionsFragment"
+        android:label="fragment_q_r_options"
+        tools:layout="@layout/fragment_q_r_options" />
 </navigation>

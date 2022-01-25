@@ -6,24 +6,28 @@ import javax.inject.Inject
 class SharedPreference @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     /*Load details From Shared Preferences*/
-    fun loadFromSharedPref(prefType: String): String {
-        return sharedPreferences.getString(prefType, "").toString()
-    }
-
-    /*Load logout boolean From Shared Preferences*/
-    fun loadLogoutBooleanFromSharedPref(prefType: String): Boolean {
-        return sharedPreferences.getBoolean(prefType, true)
+    fun <T> loadFromSharedPref(prefType: String, key: String): T {
+        return when (prefType) {
+            "String" -> sharedPreferences.getString(key, "") as T
+            "Int" -> sharedPreferences.getInt(key, 0) as T
+            "Boolean" -> sharedPreferences.getBoolean(key, false) as T
+            "Float" -> sharedPreferences.getFloat(key, 0f) as T
+            "Long" -> sharedPreferences.getLong(key, 0) as T
+            else -> sharedPreferences.getString(key, "") as T
+        }
     }
 
     /*Save details to Shared Preferences*/
-    fun saveToSharedPref(prefType: String, prefValue: String) {
+    fun <T> saveToSharedPref( prefKey : String, prefType : T) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putString(prefType, prefValue)
+        when (prefType) {
+            is String -> editor.putString(prefKey, prefType)
+            is Boolean -> editor.putBoolean(prefKey, prefType)
+            is Int -> editor.putInt(prefKey, prefType)
+            is Float -> editor.putFloat(prefKey, prefType)
+            is Long -> editor.putLong(prefKey, prefType)
+        }
         editor.apply()
-    }
-
-    fun saveBooleanToSharedPref(prefType: String, prefValue: Boolean) {
-        sharedPreferences.edit().putBoolean(prefType, prefValue).apply()
     }
 
     /*Clear values in Shared Preferences*/

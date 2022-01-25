@@ -1,17 +1,19 @@
 package com.decagon.n26_p3_usecase.features.splashScreen
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.media.VolumeShaper
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.commons.animations.Animator
 import com.decagon.n26_p3_usecase.commons.utils.Constants
+import com.decagon.n26_p3_usecase.commons.utils.showView
+import com.decagon.n26_p3_usecase.commons.utils.toast
 import com.decagon.n26_p3_usecase.core.MainActivity
 import com.decagon.n26_p3_usecase.databinding.ActivitySplashScreenBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,15 +25,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
 
-
     @Inject
     lateinit var sharedPreference: SharedPreference
-
 
     private val binding get() = _binding!!
     private var _binding: ActivitySplashScreenBinding? = null
 
-    @DelicateCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // hide action bar
@@ -41,28 +40,32 @@ class SplashScreenActivity : AppCompatActivity() {
         _binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startAnimation()
+        val notFirstTime = sharedPreference.loadFromSharedPref<Boolean>("Boolean", "firstTime")
 
-        /*Move to the home page after showing splash screen for X milliseconds*/
-        GlobalScope.launch {
-            delay(5000L)
-            withContext(Dispatchers.Main) {
+        if (notFirstTime){
+            binding.welcomeToTextView.showView()
+            val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+            startActivity(intent)
+            Animator.animateActivityFadeContext(this@SplashScreenActivity)
+            sharedPreference.saveToSharedPref("firstTime", true)
+            finish()
+        } else {
+            toast(this, "$notFirstTime")
 
-                val welcome = sharedPreference.loadFromSharedPref(Constants.WELCOME)
+            startAnimation()
 
-//                if(welcome.isEmpty()){
-//                    val intent = Intent(this@SplashScreenActivity, OnBoardingActivity::class.java)
-//                    startActivity(intent)
-//                    Animator.animateActivityFadeContext(this@SplashScreenActivity)
-//                    finish()
-//                } else {
+            lifecycleScope.launch {
+                delay(3000L)
+                withContext(Dispatchers.Main) {
                     val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                    sharedPreference.saveToSharedPref("firstTime", true)
                     startActivity(intent)
                     Animator.animateActivityFadeContext(this@SplashScreenActivity)
                     finish()
-//                }
+                }
             }
         }
+
     }
 
 
@@ -98,13 +101,6 @@ class SplashScreenActivity : AppCompatActivity() {
             .setCurve(times, volumes)
             .setInterpolatorType(VolumeShaper.Configuration.INTERPOLATOR_TYPE_CUBIC)
             .build()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun fadeInOrOutAudio(mediaPlayer: MediaPlayer, duration: Long, out: Boolean) {
-        val config = if (out) fadeOutConfig(duration) else fadeInConfig(duration)
-        val volumeShaper = mediaPlayer.createVolumeShaper(config)
-        volumeShaper.apply(VolumeShaper.Operation.PLAY)
     }
 
     override fun onDestroy() {

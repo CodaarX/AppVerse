@@ -210,13 +210,14 @@
                 android:textAllCaps="false"
                 android:textColor="@color/blue_grey_900" />
 
+
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_button"
             android:layout_width="320dp"
             android:layout_height="60dp"
-            android:layout_marginBottom="44dp"
+            android:layout_marginBottom="68dp"
             android:background="@drawable/btn_rounded_green_300"
             android:text="Edit details"
             android:textAllCaps="false"
@@ -226,15 +227,31 @@
             app:layout_constraintHorizontal_bias="0.55"
             app:layout_constraintStart_toStartOf="@+id/barcode_image_view" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/barcode_image_view"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_centerInParent="true"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/btn_rounded_green_300"
+            android:text="Save Image"
+            android:textAllCaps="false"
+            android:textColor="@color/blue_grey_900"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/barcode_image_view"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/barcode_image_view" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/barcode_image_view"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_centerInParent="true"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

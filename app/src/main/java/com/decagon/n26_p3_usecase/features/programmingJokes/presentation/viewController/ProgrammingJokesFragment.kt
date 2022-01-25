@@ -38,6 +38,11 @@ class ProgrammingJokesFragment : Fragment() {
         binding!!.snackBar.hideView()
         binding!!.answerViewTwo.hideView()
 
+
+        NetworkLiveData.observeForever {
+
+        }
+
     }
 
 
@@ -45,6 +50,7 @@ class ProgrammingJokesFragment : Fragment() {
         super.onResume()
 
         binding!!.getJokes.setOnClickListener {
+
 
             if (NetworkLiveData.isNetworkAvailable()) viewModel.getProgrammingJokes() else toast(requireContext(), "No Network available.")
 
@@ -120,6 +126,7 @@ class ProgrammingJokesFragment : Fragment() {
                         binding.snackBar.hideView()
                         binding.answerView.hideView()
                     }
+                    
                 }
             }
         })

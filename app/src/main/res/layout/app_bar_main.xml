@@ -15,11 +15,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/blue_300"
+            android:background="@color/blue_700"
             app:navigationIcon="@drawable/ic_baseline_menu_24"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@color/app_color"
+            app:titleTextColor="@color/white"
             android:onClick="toggleMenu"/>
 
 

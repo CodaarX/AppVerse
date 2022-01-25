@@ -1,4 +1,4 @@
-package com.decagon.n26_p3_usecase.features.qrCode
+package com.decagon.n26_p3_usecase.features.qrCode.utils
 
 object GsonCleaner {
     fun removeQuotesAndUnescape(uncleanJson: String): String {

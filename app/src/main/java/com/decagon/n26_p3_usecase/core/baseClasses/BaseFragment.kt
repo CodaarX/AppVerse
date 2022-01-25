@@ -17,10 +17,6 @@ abstract class BaseFragment : Fragment() {
     @Inject
     lateinit var sharedPreference: SharedPreference
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

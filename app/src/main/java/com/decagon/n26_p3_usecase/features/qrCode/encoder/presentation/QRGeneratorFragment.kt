@@ -1,20 +1,20 @@
 package com.decagon.n26_p3_usecase.features.qrCode.encoder.presentation
 
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.commons.utils.hideView
-import com.decagon.n26_p3_usecase.commons.utils.log
 import com.decagon.n26_p3_usecase.commons.utils.showView
-import com.decagon.n26_p3_usecase.commons.utils.toast
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
 import com.decagon.n26_p3_usecase.databinding.FragmentQRGeneratorBinding
-import com.decagon.n26_p3_usecase.features.qrCode.BitMapConverter
-import com.decagon.n26_p3_usecase.features.qrCode.encoder.usecases.ZxingCodeGenerator
 import com.decagon.n26_p3_usecase.features.qrCode.model.QRDetails
+import com.decagon.n26_p3_usecase.R
+import com.decagon.n26_p3_usecase.features.qrCode.utils.*
+import com.decagon.n26_p3_usecase.features.qrCode.utils.ClassConverter.gson
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 
 class QRGeneratorFragment : BaseFragment() {
 
@@ -23,7 +23,6 @@ class QRGeneratorFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference.clearSharedPref()
-
     }
 
     override fun onCreateView(
@@ -38,7 +37,7 @@ class QRGeneratorFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        val code = sharedPreference.loadFromSharedPref("qrCode")
+        val code = sharedPreference.loadFromSharedPref<String>("String","qrCode")
 
         if(code.isEmpty()) {
             // display input fields
@@ -54,39 +53,54 @@ class QRGeneratorFragment : BaseFragment() {
                     val linkedIn = linkedInInputField.text.toString().trim()
                     val profession = professionInputField.text.toString().trim()
 
-                    if(fullName.isNotEmpty() && phoneNumber.isNotEmpty() && email.isNotEmpty()){
+//                  if(fullName.isNotEmpty() && phoneNumber.isNotEmpty() && email.isNotEmpty()){
                         val details = QRDetails(fullName, phoneNumber, email, address, profession, linkedIn)
 
                         // generator is a bitmap
-                        val generator = ZxingCodeGenerator(details).generateBarCode()
+                        val bitmap = QRCodeHelper
+                            .newInstance(requireContext())
+                            ?.setContent(gson.toJson(details))
+                            ?.setErrorCorrectionLevel(ErrorCorrectionLevel.Q)
+                            ?.setMargin(2)
+                            ?.qRCOde
 
-                        barcodeImageView.setImageBitmap(generator)
+//                    val bitmap = ZxingCodeGenerator(details).generateBarCode()
 
+                        barcodeImageView.setImageBitmap(bitmap)
                         binding.enterDetailsRootView.hideView()
                         binding.barcodeImageView.showView()
                         binding.editButton.showView()
 
                         // convert bit map to string to save to shared pref
-                        sharedPreference.saveToSharedPref("qrCode", BitMapConverter.toString(generator))
+                    bitmap?.let { it1 -> BitMapConverter.toString(it1) }?.let { it2 ->
+                        sharedPreference.saveToSharedPref("qrCode", it2)
+                    }
                         binding.editButton.setOnClickListener {
-                            findNavController().navigate(R.id.QRReaderFragment)
+                            binding.enterDetailsRootView.showView()
+                            binding.barcodeImageView.hideView()
+                            binding.editButton.hideView()
                         }
 
-                    } else {
-                        toast(requireContext(), "Please fill in your name, email and phone number at least")
-                    }
+//                    } else {
+//                        toast(requireContext(), "Please fill in your name, email and phone number at least")
+//                    }
                 }
             }
 
         } else {
             // display image
             binding.enterDetailsRootView.hideView()
-            val string = sharedPreference.loadFromSharedPref("qrCode")
+            val string = sharedPreference.loadFromSharedPref<String>("String","qrCode")
             binding.barcodeImageView.setImageBitmap(BitMapConverter.toBitmap(string))
             binding.barcodeImageView.showView()
             binding.editButton.showView()
             binding.editButton.setOnClickListener { findNavController().navigate(R.id.QRReaderFragment) }
         }
 
+        binding.saveButton.setOnClickListener {
+            val bitMapDrawable : BitmapDrawable = binding.barcodeImageView.drawable as BitmapDrawable
+            val bitmap = bitMapDrawable.bitmap
+            GetStoragePermission().checkPermission(bitmap, requireContext())
+        }
     }
 }
