@@ -16,7 +16,6 @@ class TodoSharedViewModel(application: Application) : AndroidViewModel(applicati
 
     val listener : AdapterView.OnItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {}
-
         override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
             when(position) {
                 0 -> {(parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.red_900))}
@@ -35,8 +34,6 @@ class TodoSharedViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-     fun verifyInputs(title: String, description: String): Boolean {
-        return title.isNotEmpty() && description.isNotEmpty()
-    }
+     fun verifyInputs(title: String, description: String): Boolean =  title.isNotEmpty() && description.isNotEmpty()
 
 }

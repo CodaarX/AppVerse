@@ -3,21 +3,15 @@ package com.decagon.n26_p3_usecase.features.todo.presentation.viewController
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.navigation.fragment.findNavController
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.animations.Animator
-import com.decagon.n26_p3_usecase.commons.animations.ViewAnimation
 import com.decagon.n26_p3_usecase.commons.utils.hideView
 import com.decagon.n26_p3_usecase.commons.utils.showView
-import com.decagon.n26_p3_usecase.commons.utils.toast
 import com.decagon.n26_p3_usecase.core.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentListBinding
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -47,4 +41,5 @@ class ListFragment : Fragment() {
 
         binding.searchBar.hideView()
     }
+
 }
