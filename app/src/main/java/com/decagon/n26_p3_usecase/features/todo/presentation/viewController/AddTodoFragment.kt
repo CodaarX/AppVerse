@@ -10,11 +10,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.commons.utils.toast
-import com.decagon.n26_p3_usecase.core.MainActivity
+import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentAddTodoBinding
-import com.decagon.n26_p3_usecase.features.todo.model.Priority
 import com.decagon.n26_p3_usecase.features.todo.model.TodoData
 import com.decagon.n26_p3_usecase.features.todo.presentation.viewModel.TodoSharedViewModel
 import com.decagon.n26_p3_usecase.features.todo.presentation.viewModel.TodoViewModel
@@ -53,12 +51,21 @@ class AddTodoFragment : Fragment() {
                 viewModel.addToDB(todo).also {
                     toast(requireContext(), "Successfully added todo")
                     findNavController().navigateUpOrFinish(requireActivity())
+                    // hide keyboard
+                    (activity as MainActivity).hideKeyboard()
                 }
             } else {
                 toast(requireContext(), "Please fill all the fields")
             }
         }
+
+//        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//            }
+//        })
+
     }
+
 
     private fun NavController.navigateUpOrFinish(activity: FragmentActivity): Boolean {
         return if (navigateUp()) {
@@ -68,6 +75,4 @@ class AddTodoFragment : Fragment() {
             true
         }
     }
-
-
 }

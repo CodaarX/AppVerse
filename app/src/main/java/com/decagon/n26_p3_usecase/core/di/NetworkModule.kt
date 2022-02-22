@@ -1,7 +1,6 @@
 package com.decagon.n26_p3_usecase.core.di
 
-import com.decagon.n26_p3_usecase.core.data.remote.JokesApiService
-import com.decagon.n26_p3_usecase.commons.utils.Constants.JOKES_BASE_URL
+import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,18 +38,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesRetrofit(converter : Converter.Factory, client : OkHttpClient ): Retrofit {
+    fun providesRetrofit(converter : Converter.Factory, client : OkHttpClient, sharedPreference: SharedPreference): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(JOKES_BASE_URL)
+            .baseUrl(sharedPreference.loadFromSharedPref("String", "BASE_URL") as String)
             .client(client)
             .addConverterFactory(converter)
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun provideApiService(retrofit : Retrofit) : JokesApiService {
-        return retrofit.create(JokesApiService::class.java)
-    }
 
 }

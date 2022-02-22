@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#194881"
-    tools:context=".core.MainActivity">
+    tools:context=".core.presentation.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -271,6 +271,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/running_tracker_feature"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="?attr/selectableItemBackground"
@@ -287,13 +288,13 @@
                                         android:layout_width="@dimen/spacing_mlarge"
                                         android:layout_height="@dimen/spacing_mlarge"
                                         android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_flashlight_on_24"
+                                        app:srcCompat="@drawable/ic_run"
                                         app:tint="@android:color/white" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Touch"
+                                        android:text="Running"
                                         android:textColor="@android:color/white" />
 
                                 </LinearLayout>
@@ -339,6 +340,7 @@
                                     android:textColor="@color/grey_20" />
 
                                 <LinearLayout
+                                    android:id="@+id/map_feature"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="?attr/selectableItemBackground"
@@ -367,6 +369,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/joke_feature"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="?attr/selectableItemBackground"

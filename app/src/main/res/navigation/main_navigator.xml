@@ -3,32 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigator"
-    app:startDestination="@id/programmingJokesFragment">
+    app:startDestination="@id/todo_navigation">
 
     <fragment
         android:id="@+id/programmingJokesFragment"
         android:name="com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewController.ProgrammingJokesFragment"
         android:label="fragment_programming_jokes"
         tools:layout="@layout/fragment_programming_jokes" />
-    <fragment
-        android:id="@+id/onlineRadioFragment"
-        android:name="com.decagon.n26_p3_usecase.features.onlineRadio.presentation.OnlineRadioFragment"
-        android:label="fragment_online_radio"
-        tools:layout="@layout/fragment_online_radio" >
-        <action
-            android:id="@+id/action_onlineRadioFragment_pop"
-            app:enterAnim="@anim/animate_fade_enter"
-            app:exitAnim="@anim/animate_fade_exit"
-            app:popUpTo="@id/onlineRadioFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
     <include app:graph="@navigation/qr_navigator" />
-    <fragment
-        android:id="@+id/alarmFragment"
-        android:name="com.decagon.n26_p3_usecase.features.alarm.presentation.viewController.AlarmFragment"
-        android:label="fragment_alarm"
-        tools:layout="@layout/fragment_alarm" />
     <include app:graph="@navigation/todo_navigation" />
-    <include app:graph="@navigation/map_navigator" />
+    <include app:graph="@navigation/jokes_navigator" />
+    <include app:graph="@navigation/run_tracker_navigator" />
+    <fragment
+        android:id="@+id/setUpFragment"
+        android:name="com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.SetUpFragment"
+        android:label="fragment_set_up"
+        tools:layout="@layout/fragment_set_up" />
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.decagon.n26_p3_usecase.features.locateMe.presentation.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
 
 </navigation>

@@ -1,9 +1,12 @@
 package com.decagon.n26_p3_usecase.commons.utils
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.room.TypeConverter
 import com.decagon.n26_p3_usecase.features.todo.model.Priority
 import com.decagon.n26_p3_usecase.features.todo.model.TodoData
 import com.google.gson.Gson
+import java.io.ByteArrayOutputStream
 
 
 class Converter {
@@ -35,5 +38,15 @@ class Converter {
     fun jsonStringToTodoData(value: String) =
         Gson().fromJson(value, Array<TodoData>::class.java).toList()
 
+    @TypeConverter
+    fun fromBitmap(bitmap: Bitmap): ByteArray {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        return stream.toByteArray()
+    }
 
+    @TypeConverter
+    fun toBitmap(byteArray: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    }
 }

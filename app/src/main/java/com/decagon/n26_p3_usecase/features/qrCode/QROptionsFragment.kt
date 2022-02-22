@@ -1,10 +1,12 @@
 package com.decagon.n26_p3_usecase.features.qrCode
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.databinding.FragmentQROptionsBinding
@@ -38,6 +40,25 @@ class QROptionsFragment : Fragment() {
             findNavController().navigate(R.id.QRReaderFragment)
         }
 
+//        verifyExit()
     }
+
+    private fun verifyExit() {
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    android.app.AlertDialog.Builder(requireContext())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Exit App")
+                        .setMessage("Are you sure you want to exit this application?")
+                        .setPositiveButton("Yes",
+                            DialogInterface.OnClickListener { dialog, which -> requireActivity().finish() })
+                        .setNegativeButton("No", null)
+                        .show()
+                }
+            })
+    }
+
 
 }

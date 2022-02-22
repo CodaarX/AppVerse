@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/jokes_navigator">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/jokes_navigator"
+    app:startDestination="@id/programmingJokesFragment2">
 
+    <fragment
+        android:id="@+id/programmingJokesFragment2"
+        android:name="com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewController.ProgrammingJokesFragment"
+        android:label="fragment_programming_jokes"
+        tools:layout="@layout/fragment_programming_jokes" />
 </navigation>

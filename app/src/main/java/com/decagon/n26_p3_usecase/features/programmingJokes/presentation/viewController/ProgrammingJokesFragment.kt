@@ -1,30 +1,37 @@
 package com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewController
 
+import android.R
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.decagon.n26_p3_usecase.commons.utils.*
+import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
 import com.decagon.n26_p3_usecase.databinding.FragmentProgrammingJokesBinding
 import com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewModel.JokeViewModel
+import com.decagon.n26_p3_usecase.features.programmingJokes.utils.JokesConstants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProgrammingJokesFragment : Fragment() {
+class ProgrammingJokesFragment : BaseFragment() {
 
     private var binding : FragmentProgrammingJokesBinding? = null
     private  val viewModel : JokeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreference.saveToSharedPref("BASE_URL", JokesConstants.JOKES_BASE_URL)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentProgrammingJokesBinding.inflate(inflater, container, false)
         return binding!!.root
@@ -43,6 +50,7 @@ class ProgrammingJokesFragment : Fragment() {
 
         }
 
+//      verifyExit()
     }
 
 
@@ -50,10 +58,7 @@ class ProgrammingJokesFragment : Fragment() {
         super.onResume()
 
         binding!!.getJokes.setOnClickListener {
-
-
             if (NetworkLiveData.isNetworkAvailable()) viewModel.getProgrammingJokes() else toast(requireContext(), "No Network available.")
-
             binding!!.revealAnswer.hideView()
             binding!!.answerViewTwo.hideView()
             initObservers()
@@ -67,9 +72,9 @@ class ProgrammingJokesFragment : Fragment() {
 
     private fun initObservers(){
 
-        viewModel.jokeState.observe(viewLifecycleOwner, { resource ->
+        viewModel.jokeState.observe(viewLifecycleOwner) { resource ->
 
-            when (resource){
+            when (resource) {
 
                 is Resource.Success -> {
 
@@ -116,20 +121,16 @@ class ProgrammingJokesFragment : Fragment() {
                 }
 
                 is Resource.Loading -> {
-
                     binding?.progressBar?.showView()
-
                     binding?.let { binding ->
-
                         binding.title.text = resource.message
                         binding.answerViewTwo.hideView()
                         binding.snackBar.hideView()
                         binding.answerView.hideView()
                     }
-                    
                 }
             }
-        })
+        }
     }
 
     override fun onDestroy() {
@@ -138,4 +139,31 @@ class ProgrammingJokesFragment : Fragment() {
     }
 
 
-}
+    private fun verifyExit() {
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    GenericDialogueBuilder.showDialogue(
+                        requireContext(),
+                        R.drawable.ic_dialog_alert,
+                        "Exit App",
+                        "Are you sure you want to exit?",
+                        R.drawable.ic_dialog_alert,
+                        "Yes",
+                        "No",
+                        {exitPositiveButtonClicked()},
+                        {exitNegativeButtonClicked()}
+                    )
+                }
+
+                fun exitPositiveButtonClicked() {
+                    requireActivity().finish()
+                }
+
+                fun exitNegativeButtonClicked() {
+                    // do nothing
+                }
+            })
+        }
+    }

@@ -11,10 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.commons.animations.Animator
-import com.decagon.n26_p3_usecase.commons.utils.Constants
 import com.decagon.n26_p3_usecase.commons.utils.showView
 import com.decagon.n26_p3_usecase.commons.utils.toast
-import com.decagon.n26_p3_usecase.core.MainActivity
+import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.ActivitySplashScreenBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*

@@ -7,12 +7,20 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.commons.utils.log
 import com.decagon.n26_p3_usecase.features.todo.model.Priority
+import com.decagon.n26_p3_usecase.features.todo.model.TodoData
 
 class TodoSharedViewModel(application: Application) : AndroidViewModel(application) {
+
+//    val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(true)
+//
+//    fun checkIfDatabaseIsEmpty(todoList: List<TodoData>) {
+//        emptyDatabase.value = todoList.isEmpty()
+//    }
 
     val listener : AdapterView.OnItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -29,11 +37,18 @@ class TodoSharedViewModel(application: Application) : AndroidViewModel(applicati
         return when (priority) {
             "High Priority" -> Priority.HIGH
             "Medium Priority" -> Priority.MEDIUM
-            "Low Priority " -> Priority.LOW
-            else -> Priority.LOW
+            "Low Priority" -> Priority.LOW
+            else -> Priority.HIGH
         }
     }
 
-     fun verifyInputs(title: String, description: String): Boolean =  title.isNotEmpty() && description.isNotEmpty()
+    fun verifyInputs(title: String, description: String): Boolean =  title.isNotEmpty() && description.isNotEmpty()
 
+    fun parsePrioritytoInt(priority: Priority): Int {
+        return when (priority) {
+            Priority.HIGH -> 0
+            Priority.MEDIUM -> 1
+            Priority.LOW -> 2
+        }
+    }
 }

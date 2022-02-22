@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".core.MainActivity">
+    tools:context=".core.presentation.MainActivity">
 
     <!--toolbar and header  -->
     <com.google.android.material.appbar.AppBarLayout

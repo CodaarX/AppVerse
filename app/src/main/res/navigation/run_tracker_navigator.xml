@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/run_tracker_navigator"
+    app:startDestination="@id/runFragment">
+
+    <fragment
+        android:id="@+id/trackerHomeFragment"
+        android:name="com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.TrackerHomeFragment"
+        android:label="fragment_tracker_home"
+        tools:layout="@layout/fragment_tracker_home" />
+    <fragment
+        android:id="@+id/runFragment"
+        android:name="com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.RunFragment"
+        android:label="fragment_run"
+        tools:layout="@layout/fragment_run" >
+        <action
+            android:id="@+id/action_runFragment_to_trackcingFragment"
+            app:destination="@id/trackcingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/trackcingFragment"
+        android:name="com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.TrackcingFragment"
+        android:label="fragment_trackcing"
+        tools:layout="@layout/fragment_trackcing" >
+        <action
+            android:id="@+id/action_trackcingFragment_to_runFragment"
+            app:destination="@id/runFragment" />
+    </fragment>
+</navigation>

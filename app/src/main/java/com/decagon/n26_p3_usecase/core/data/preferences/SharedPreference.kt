@@ -1,6 +1,7 @@
 package com.decagon.n26_p3_usecase.core.data.preferences
 
 import android.content.SharedPreferences
+import android.util.Patterns
 import javax.inject.Inject
 
 class SharedPreference @Inject constructor(private val sharedPreferences: SharedPreferences) {
@@ -34,6 +35,12 @@ class SharedPreference @Inject constructor(private val sharedPreferences: Shared
     fun clearSharedPref() {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.clear()
+        editor.apply()
+    }
+
+    fun removeSharedPref(key: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(key)
         editor.apply()
     }
 }

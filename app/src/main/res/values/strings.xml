@@ -23,6 +23,7 @@
     <string name="title">Title</string>
     <string name="delete_item">Delete item</string>
     <string name="textview">TextView</string>
+    <string name="google_app_id">AIzaSyB_bnUq6z5RV3Exa5HpnITYJ45mzXtGKVo</string>
 
     <!--    array string for to do-->
     <string-array name="priorities">
@@ -30,4 +31,15 @@
         <item>Medium Priority</item>
         <item>Low Priority</item>
     </string-array>
+
+    <!--  running tracker  -->
+    <string-array name="filter_options">
+        <item>Date</item>
+        <item>Running Time</item>
+        <item>Distance</item>
+        <item>Average Speed</item>
+        <item>Calories Burned</item>
+    </string-array>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">ENTER YOUR API KEY HERE</string>
+
 </resources>

@@ -24,7 +24,6 @@ android:layout_height="match_parent">
             android:ems="15"
             android:hint="Title"
             android:paddingEnd="24dp"
-            android:inputType="textCapCharacters"
             app:layout_constraintBottom_toTopOf="@id/to_do_add_priority_spinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

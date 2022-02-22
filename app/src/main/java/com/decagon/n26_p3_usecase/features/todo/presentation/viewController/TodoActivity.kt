@@ -1,34 +1,48 @@
 package com.decagon.n26_p3_usecase.features.todo.presentation.viewController
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.decagon.n26_p3_usecase.databinding.ActivityMainBinding
+import com.decagon.n26_p3_usecase.R
+import com.decagon.n26_p3_usecase.databinding.ActivityTodoBinding
+import com.decagon.n26_p3_usecase.features.qrCode.QRCodeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class TodoActivity : AppCompatActivity() {
 
-    private var binding: ActivityMainBinding? = null
+
+    private var binding: ActivityTodoBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityTodoBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        // Set up the action bar.
-        setupActionBarWithNavController(findNavController(com.decagon.n26_p3_usecase.R.id.nav_host_fragment))
 
+        // Set up the action bar.
+        setupActionBarWithNavController(findNavController(R.id.nav_host_fragment))
     }
 
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(com.decagon.n26_p3_usecase.R.id.nav_host_fragment)
+        val navController = this.findNavController(R.id.nav_host_fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.finish()
+    }
+
+
 
 }

@@ -2,15 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="@string/search"
+        android:id="@+id/runFragment"
+        android:icon="@drawable/ic_run"
+        app:showAsAction="ifRoom"
+        android:title="Start Run" />
+
+    <item
+        android:id="@+id/statisticsFragment"
+        android:icon="@drawable/ic_graph"
+        android:title="Stats"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/clear_list"
-        android:icon="@drawable/ic_baseline_delete_sweep_24"
-        android:title="Clear list"
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
         app:showAsAction="ifRoom" />
 
 </menu>

@@ -5,5 +5,4 @@ sealed class Resource<T>(){
     data class Error<T>(val message: String) : Resource<T>()
     data class Loading<T>(val message: String) : Resource<T>()
     class Empty<T>() : Resource<T>()
-
 }

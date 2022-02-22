@@ -1,6 +1,6 @@
 package com.decagon.n26_p3_usecase.features.programmingJokes.di
 
-import com.decagon.n26_p3_usecase.core.data.remote.JokesApiService
+import com.decagon.n26_p3_usecase.features.programmingJokes.remoteService.JokesApiService
 import com.decagon.n26_p3_usecase.features.programmingJokes.repository.contracts.JokesRepository
 import com.decagon.n26_p3_usecase.features.programmingJokes.repository.implementations.JokesRepositoryImpl
 import com.decagon.n26_p3_usecase.features.programmingJokes.usecase.contracts.AnyJokesUseCase
