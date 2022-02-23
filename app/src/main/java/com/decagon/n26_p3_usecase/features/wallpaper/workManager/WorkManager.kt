@@ -1,4 +1,4 @@
-package com.decagon.n26_p3_usecase.features.locationTracker.workManager
+package com.decagon.n26_p3_usecase.features.locateMe.workManager
 
 import android.content.Context
 import androidx.work.Worker

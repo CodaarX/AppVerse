@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.decagon.n26_p3_usecase.R
+import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewModel.MainViewModel
 import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewModel.StatisticsViewModel
 
@@ -25,5 +26,10 @@ class StatisticsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_statistics, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).supportActionBar?.title = "Run Stats"
     }
 }

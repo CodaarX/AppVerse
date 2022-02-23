@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar!!.setHomeButtonEnabled(true)
-        actionBar!!.title = "Tool Box"
+        actionBar!!.title = "AppVerse"
     }
 
     private fun initNavigationMenu() {

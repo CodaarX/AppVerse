@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.commons.utils.hideView
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
+import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentSetUpBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +35,7 @@ class SetUpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).supportActionBar?.title = "Set Up"
 
         binding.startButon.setOnClickListener {
             sharedPreference.saveToSharedPref("runner_set", true)

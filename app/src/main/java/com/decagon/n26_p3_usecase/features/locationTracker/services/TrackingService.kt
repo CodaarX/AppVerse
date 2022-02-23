@@ -36,6 +36,7 @@ typealias PolyLines = MutableList<PolyLine>
 class TrackingService : LifecycleService() {
 
     private var isFirstRun = true
+    private var serviceKilled = false
 
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -43,7 +44,7 @@ class TrackingService : LifecycleService() {
     @Inject
     lateinit var baseNotificationBuilder: NotificationCompat.Builder
 
-    lateinit var currentNotificationBuilder: NotificationCompat.Builder
+    private lateinit var currentNotificationBuilder: NotificationCompat.Builder
 
     private val timeRunInSeconds = MutableLiveData<Long>()
 
@@ -54,11 +55,6 @@ class TrackingService : LifecycleService() {
         val pathPoints = MutableLiveData<PolyLines>()
         var userCurrentLocation = MutableLiveData<LatLng>()
     }
-
-    private fun addEmptyPolyLine() = pathPoints.value?.apply {
-        add(mutableListOf())
-        pathPoints.postValue(this)
-    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
 
     private fun postInitialValue(){
         isTracking.postValue(false)
@@ -78,6 +74,10 @@ class TrackingService : LifecycleService() {
         }
     }
 
+    private fun addEmptyPolyLine() = pathPoints.value?.apply {
+        add(mutableListOf())
+        pathPoints.postValue(this)
+    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
 
     private val locationCallback = object : LocationCallback(){ //callback for location updates
 
@@ -126,19 +126,20 @@ class TrackingService : LifecycleService() {
             set(currentNotificationBuilder, ArrayList<NotificationCompat.Action>())
         }
 
-        currentNotificationBuilder = baseNotificationBuilder.apply {
-            addAction(R.drawable.ic_pause_black_24dp, notificationActionText, pendingIntent)
-//            setOngoing(true)
-//            setAutoCancel(false)
+        if (!serviceKilled){
+            currentNotificationBuilder = baseNotificationBuilder.apply {
+                addAction(R.drawable.ic_pause_black_24dp, notificationActionText, pendingIntent)
+            }
+            notificationManager.notify(NOTIFICATION_ID, currentNotificationBuilder.build())
         }
 
-        notificationManager.notify(NOTIFICATION_ID, currentNotificationBuilder.build())
-
         timeRunInSeconds.observe(this) {
-            val notification = currentNotificationBuilder.apply {
-                setContentText(TrackingUtils.getFormattedStopWatchTime(it * 1000L, false))
-            }.build()
-            notificationManager.notify(NOTIFICATION_ID, notification)
+            if (!serviceKilled){
+                val notification = currentNotificationBuilder.apply {
+                    setContentText(TrackingUtils.getFormattedStopWatchTime(it * 1000L, false))
+                }.build()
+                notificationManager.notify(NOTIFICATION_ID, notification)
+            }
         }
     }
 
@@ -168,7 +169,6 @@ class TrackingService : LifecycleService() {
         }
     }
 
-
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
 
         intent.let {
@@ -182,19 +182,14 @@ class TrackingService : LifecycleService() {
                         startTimer()
                     }
                 }
-                TrackingUtils.ACTION_STOP_SERVICE -> {
-                    stopForegroundService(it)
-                }
                 TrackingUtils.ACTION_PAUSE_SERVICE -> {
                     pauseService()
                 }
-                else -> {
-                    timber("Unknown action")
-    //                    stopForegroundService(Intent(this, TrackingService::class.java))
+                TrackingUtils.ACTION_STOP_SERVICE -> {
+                    killService()
                 }
             }
         }
-
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -239,11 +234,6 @@ class TrackingService : LifecycleService() {
             startForeground(NOTIFICATION_ID, baseNotificationBuilder.build()) // start the service in foreground
     }
 
-    private fun stopForegroundService(intent: Intent) { // to stop the service when the notification is clicked
-        stopForeground(true)
-        stopSelf()
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager){ // to create a notification channel
         val channel = NotificationChannel(
@@ -254,4 +244,12 @@ class TrackingService : LifecycleService() {
         notificationManager.createNotificationChannel(channel)
     }
 
+    private fun killService(){
+        serviceKilled = true
+        isFirstRun = true
+        pauseService()
+        postInitialValue()
+        stopForeground(true)
+        stopSelf()
+    }
 }

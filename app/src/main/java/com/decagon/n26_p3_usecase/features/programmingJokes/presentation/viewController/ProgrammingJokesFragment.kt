@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.decagon.n26_p3_usecase.commons.utils.*
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
+import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentProgrammingJokesBinding
 import com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewModel.JokeViewModel
 import com.decagon.n26_p3_usecase.features.programmingJokes.utils.JokesConstants
@@ -39,6 +40,8 @@ class ProgrammingJokesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as MainActivity).supportActionBar?.title = "Jokes"
 
         binding!!.progressBar.hideView()
         binding!!.revealAnswer.hideView()

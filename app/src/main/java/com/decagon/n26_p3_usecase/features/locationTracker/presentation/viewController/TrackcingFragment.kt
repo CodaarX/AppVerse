@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.commons.utils.GenericDialogueBuilder
 import com.decagon.n26_p3_usecase.commons.utils.hideView
@@ -26,20 +27,19 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TrackcingFragment : BaseFragment() {
 
-    private val  viewModel: MainViewModel by viewModels()
     private var isTracking = false
     private var pathPoints = mutableListOf<PolyLine>()
     private var map: GoogleMap? = null
     private lateinit var  marker : MarkerOptions
     private var mark : Marker? = null
     private var currentTimeMills = 0L
-    var buttonText = "start"
+    private var buttonText = "start"
 
     private lateinit var binding : FragmentTrackcingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LocationProvider.provide(requireContext(), requireActivity() as MainActivity)
+        LocationProvider.provide(requireContext(), requireActivity())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -53,14 +53,15 @@ class TrackcingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnToggleRun.setOnClickListener { toggleRun() }
         binding.mapView.onCreate(savedInstanceState)
-        binding.mapView.getMapAsync { it ->
+//        (activity as MainActivity).supportActionBar?.title = "Tracking Run"
+        binding.mapView.getMapAsync {
             map = it
             addAllPolylines()
         }
         subscribeToObservers()
         binding.cancelLayout?.setOnClickListener {
+            if (isTracking){ toggleRun() }
             showTrackingCancelDialogue()
-            toggleRun()
         }
     }
 
@@ -92,7 +93,6 @@ class TrackcingFragment : BaseFragment() {
                 binding.mapBottomBar!!.hideView()
             }
         }
-
     }
 
     private fun toggleRun(){
@@ -137,9 +137,7 @@ class TrackcingFragment : BaseFragment() {
 
     private fun cancelRunDialoguePositiveClick(){
         sendCommandToService(TrackingUtils.ACTION_STOP_SERVICE)
-        val intent = Intent(requireContext(), MainActivity::class.java)
-        startActivity(intent)
-        requireActivity().finish()
+        findNavController().navigate(R.id.action_trackcingFragment_to_runFragment)
     }
 
     private fun addMarker(){
@@ -148,7 +146,7 @@ class TrackcingFragment : BaseFragment() {
                 .position(it)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
             mark?.remove()
-            mark = map?.addMarker(marker)!!
+            mark = map?.addMarker(marker)
         }
     }
 

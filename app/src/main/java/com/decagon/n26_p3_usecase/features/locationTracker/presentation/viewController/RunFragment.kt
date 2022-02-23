@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
+import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentRunBinding
 import com.decagon.n26_p3_usecase.features.locationTracker.utils.TrackingUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +31,7 @@ class RunFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        (activity as MainActivity).supportActionBar?.title = "Run Options"
         binding.runFragmentNewRunsFab.setOnClickListener { findNavController().navigate(R.id.action_runFragment_to_trackcingFragment) }
         checkPermissions()
     }
@@ -76,5 +78,6 @@ class RunFragment : BaseFragment(), EasyPermissions.PermissionCallbacks {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
+
 
 }

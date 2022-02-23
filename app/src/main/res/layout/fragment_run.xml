@@ -187,7 +187,7 @@
         android:backgroundTint="@color/app_color"
         android:clickable="true"
         android:focusable="true"
-        app:srcCompat="@drawable/ic_baseline_add_24"
+        app:srcCompat="@drawable/ic_run"
         app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

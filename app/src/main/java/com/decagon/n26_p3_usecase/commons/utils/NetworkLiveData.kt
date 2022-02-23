@@ -15,7 +15,7 @@ object NetworkLiveData : LiveData<Boolean>() {
         getDetails()
     }
 
-    private lateinit var application: Application
+    lateinit var application: Application
     private lateinit var networkRequest: NetworkRequest
 
     fun init(application: Application) {
