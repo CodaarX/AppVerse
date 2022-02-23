@@ -1,5 +1,6 @@
 package com.decagon.n26_p3_usecase.commons.utils
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.getSystemService
 import com.decagon.n26_p3_usecase.R
+import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.TrackLocationActivity
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
@@ -32,8 +34,11 @@ fun showSnackBar(view: CardView, message: String){
     snackbar.show()
 }
 
-fun snack(view: View, message: String){
-     Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
+inline fun <reified T> snack(view: T, message: String){
+    when(view){
+       is View -> Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
+        is TrackLocationActivity -> Snackbar.make(view.findViewById(R.id.location_activity_root), message, Snackbar.LENGTH_LONG).show()
+    }
 }
 
 fun View.hideView(){

@@ -11,8 +11,8 @@ data class Run(
     var timestamp: Long = 0L, // when run was
     var avgSpeed: Float = 0f,
     var distanceInMeters: Int = 0,
+    var caloriesBurned: Int = 0,
     var timeInMillis: Long = 0L, // how long
-    var caloriesBurned: Int = 0
 ) {
     @PrimaryKey(autoGenerate = true) // for room to handle generating the id and we can create a new run without having to pass the id
     var id: Int? = null

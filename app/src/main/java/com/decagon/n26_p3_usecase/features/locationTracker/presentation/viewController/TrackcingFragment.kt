@@ -1,28 +1,40 @@
 package com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController
 
+import `in`.myinnos.savebitmapandsharelib.SaveAndShare
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.GenericDialogueBuilder
-import com.decagon.n26_p3_usecase.commons.utils.hideView
-import com.decagon.n26_p3_usecase.commons.utils.showView
+import com.decagon.n26_p3_usecase.commons.utils.*
 import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
 import com.decagon.n26_p3_usecase.databinding.FragmentTrackcingBinding
+import com.decagon.n26_p3_usecase.features.locationTracker.model.Run
 import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewModel.MainViewModel
 import com.decagon.n26_p3_usecase.features.locationTracker.services.PolyLine
 import com.decagon.n26_p3_usecase.features.locationTracker.services.TrackingService
 import com.decagon.n26_p3_usecase.features.locationTracker.utils.LocationProvider
 import com.decagon.n26_p3_usecase.features.locationTracker.utils.TrackingUtils
+import com.decagon.n26_p3_usecase.features.locationTracker.utils.TrackingUtils.ACTION_STOP_SERVICE
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Math.round
+import java.util.*
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class TrackcingFragment : BaseFragment() {
@@ -35,7 +47,10 @@ class TrackcingFragment : BaseFragment() {
     private var currentTimeMills = 0L
     private var buttonText = "start"
 
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var binding : FragmentTrackcingBinding
+
+    private var weigth = 80f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +77,16 @@ class TrackcingFragment : BaseFragment() {
         binding.cancelLayout?.setOnClickListener {
             if (isTracking){ toggleRun() }
             showTrackingCancelDialogue()
+        }
+
+        binding.finishLayout?.setOnClickListener {
+            zoomToSeeWholeTrack()
+            endRunAndSaveToDb()
+        }
+
+        binding.downloadAndShareLayout?.setOnClickListener {
+            if (isTracking){ toggleRun() }
+            shareLocationSnapShot()
         }
     }
 
@@ -150,6 +175,55 @@ class TrackcingFragment : BaseFragment() {
         }
     }
 
+    private fun zoomToSeeWholeTrack(){
+        val bounds = LatLngBounds.Builder()
+        for (polyline in pathPoints){
+            for (point in polyline){
+                bounds.include(point)
+            }
+        }
+        map?.moveCamera(CameraUpdateFactory.newLatLngBounds(
+            bounds.build(),
+            binding.mapView.width,
+            binding.mapView.height,
+            (binding.mapView.height * 0.05f).toInt())
+        )
+    }
+
+    private fun shareLocationSnapShot(){
+        map?.snapshot { bitmap ->
+            SaveAndShare.save(requireActivity(), bitmap, "run_snapshot","my current location", "image/jpeg")
+        }
+    }
+
+    private fun endRunAndSaveToDb(){
+        map?.snapshot { bitmap ->
+            var distanceInMeters = 0
+            for (polyline in pathPoints){
+                distanceInMeters += TrackingUtils.calculatePolylineLength(polyline).toInt()
+            }
+//            val avgSpeed = round((distanceInMeters / 1000f) / (currentTimeMills / 1000f / 60 / 60) * 10) / 10f
+            val avgSpeed = ((distanceInMeters / 1000f) / (currentTimeMills / 1000f / 60 / 60) * 10).roundToInt() / 10f
+            val dateTimeStamp = Calendar.getInstance().timeInMillis
+            val caloriesBurned = ((distanceInMeters / 1000f) * weigth).toInt()
+            val run = Run(
+                bitmap,
+                dateTimeStamp,
+                avgSpeed,
+                distanceInMeters,
+                caloriesBurned,
+                currentTimeMills,
+            )
+            viewModel.insertRun(run)
+            sendCommandToService(ACTION_STOP_SERVICE)
+            snack(requireView(), "Run saved to database")
+            lifecycleScope.launch {
+                delay(1500)
+                findNavController().navigate(R.id.action_trackcingFragment_to_runFragment)
+            }
+        }
+    }
+
     private fun addLatestPolyLine(){ // add the latest polyline to the map
         if(pathPoints.isNotEmpty() && pathPoints.last().size > 1){
             val preLastLatLng = pathPoints.last()[pathPoints.last().size - 2]
@@ -204,4 +278,6 @@ class TrackcingFragment : BaseFragment() {
 //        super.onDestroy()
 //        binding.mapView.onDestroy()
 //    }
+
+
 }

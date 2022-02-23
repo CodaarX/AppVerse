@@ -3,9 +3,11 @@ package com.decagon.n26_p3_usecase.features.locationTracker.utils
 import android.Manifest
 import android.content.Context
 import android.graphics.Color
+import android.location.Location
 import java.util.concurrent.TimeUnit
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.decagon.n26_p3_usecase.features.locationTracker.services.PolyLine
 import pub.devrel.easypermissions.EasyPermissions
 
 object TrackingUtils {
@@ -51,6 +53,26 @@ object TrackingUtils {
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION
             )
         }
+
+    fun calculatePolylineLength(polyLine: PolyLine): Float{
+        var distance = 0f
+        for(i in 0 until polyLine.size - 2){
+            val pos1 = polyLine[i]
+            val pos2 = polyLine[i+1]
+
+            val result = FloatArray(1)
+            Location.distanceBetween(
+                pos1.latitude,
+                pos1.longitude,
+                pos2.latitude,
+                pos2.longitude,
+                result
+            )
+
+            distance += result[0]
+        }
+        return distance
+    }
 
     fun getFormattedStopWatchTime(ms: Long, includeMillis: Boolean = false): String {
         var milliseconds = ms

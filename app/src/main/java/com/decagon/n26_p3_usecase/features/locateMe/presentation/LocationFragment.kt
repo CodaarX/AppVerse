@@ -1,5 +1,6 @@
 package com.decagon.n26_p3_usecase.features.locateMe.presentation
 
+import `in`.myinnos.savebitmapandsharelib.SaveAndShare
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -81,6 +82,16 @@ class LocationFragment : Fragment() {
         binding.directionButton.setOnClickListener {
             Toast.makeText(requireContext(), "Add Clicked", Toast.LENGTH_SHORT)
                 .show()
+        }
+
+        binding.shareButton.setOnClickListener {
+            shareLocationSnapShot()
+        }
+    }
+
+    private fun shareLocationSnapShot(){
+        mMap.snapshot { bitmap ->
+            SaveAndShare.save(requireActivity(), bitmap, "run_snapshot","my current location", "image/jpeg")
         }
     }
 
