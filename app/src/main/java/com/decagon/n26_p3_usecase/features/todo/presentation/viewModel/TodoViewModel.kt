@@ -1,8 +1,6 @@
 package com.decagon.n26_p3_usecase.features.todo.presentation.viewModel
 
-import android.app.Application
 import androidx.lifecycle.*
-import com.decagon.n26_p3_usecase.commons.utils.log
 import com.decagon.n26_p3_usecase.features.todo.data.repository.contract.TodoRepository
 import com.decagon.n26_p3_usecase.features.todo.model.TodoData
 import dagger.hilt.android.lifecycle.HiltViewModel

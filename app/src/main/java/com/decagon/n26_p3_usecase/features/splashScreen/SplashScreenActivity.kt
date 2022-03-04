@@ -10,14 +10,14 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.animations.Animator
-import com.decagon.n26_p3_usecase.commons.utils.showView
-import com.decagon.n26_p3_usecase.commons.utils.toast
+import com.decagon.n26_p3_usecase.commons.ui.animations.Animator
+import com.decagon.n26_p3_usecase.commons.ui.showView
+import com.decagon.n26_p3_usecase.commons.ui.toast
 import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.ActivitySplashScreenBinding
+import com.example.mike_utils.MikeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import java.util.*
 import javax.inject.Inject
 
 
@@ -34,7 +34,6 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // hide action bar
         supportActionBar?.hide()
-
         // set binding
         _binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)

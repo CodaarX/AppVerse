@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.log
 import com.decagon.n26_p3_usecase.features.todo.model.Priority
 import com.decagon.n26_p3_usecase.features.todo.model.TodoData
 import com.decagon.n26_p3_usecase.features.todo.presentation.viewController.ListFragmentDirections

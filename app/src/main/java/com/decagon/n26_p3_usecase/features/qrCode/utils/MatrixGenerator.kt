@@ -1,9 +1,8 @@
 package com.decagon.n26_p3_usecase.features.qrCode.utils
 
-import com.decagon.n26_p3_usecase.commons.utils.log
+import com.decagon.n26_p3_usecase.commons.ui.log
 import com.decagon.n26_p3_usecase.features.qrCode.model.QRDetails
 import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatReader
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
 

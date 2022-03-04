@@ -2,23 +2,22 @@ package com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewCon
 
 import `in`.myinnos.savebitmapandsharelib.SaveAndShare
 import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.decagon.n26_p3_usecase.R
+import com.decagon.n26_p3_usecase.commons.ui.hideView
+import com.decagon.n26_p3_usecase.commons.ui.showView
+import com.decagon.n26_p3_usecase.commons.ui.snack
 import com.decagon.n26_p3_usecase.commons.utils.*
-import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
 import com.decagon.n26_p3_usecase.databinding.FragmentTrackcingBinding
+import com.decagon.n26_p3_usecase.features.locationTracker.data.mediator.viewModel.RunMediatorViewModel
 import com.decagon.n26_p3_usecase.features.locationTracker.model.Run
-import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewModel.MainViewModel
 import com.decagon.n26_p3_usecase.features.locationTracker.services.PolyLine
 import com.decagon.n26_p3_usecase.features.locationTracker.services.TrackingService
 import com.decagon.n26_p3_usecase.features.locationTracker.utils.LocationProvider
@@ -30,9 +29,6 @@ import com.google.android.gms.maps.model.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
-import java.lang.Math.round
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -47,10 +43,10 @@ class TrackcingFragment : BaseFragment() {
     private var currentTimeMills = 0L
     private var buttonText = "start"
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: RunMediatorViewModel by viewModels()
     private lateinit var binding : FragmentTrackcingBinding
 
-    private var weigth = 80f
+    private var weigth: Float = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +62,7 @@ class TrackcingFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        weigth = sharedPreference.loadFromSharedPref("Float", "runner_weight")
         binding.btnToggleRun.setOnClickListener { toggleRun() }
         binding.mapView.onCreate(savedInstanceState)
 //        (activity as MainActivity).supportActionBar?.title = "Tracking Run"

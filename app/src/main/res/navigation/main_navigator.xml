@@ -24,5 +24,10 @@
         android:name="com.decagon.n26_p3_usecase.features.locateMe.presentation.LocationFragment"
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/wallPaperFragment"
+        android:name="com.decagon.n26_p3_usecase.features.wallpaper.presentation.viewController.WallPaperFragment"
+        android:label="fragment_wall_paper"
+        tools:layout="@layout/fragment_wall_paper" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.decagon.n26_p3_usecase.commons.animations;
+package com.decagon.n26_p3_usecase.commons.ui.animations;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

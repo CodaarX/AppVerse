@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.decagon.n26_p3_usecase.commons.utils.Converter
 import com.decagon.n26_p3_usecase.features.locationTracker.data.dao.RunDao
+import com.decagon.n26_p3_usecase.features.locationTracker.data.mediator.RunMediatorDao
 import com.decagon.n26_p3_usecase.features.locationTracker.model.Run
 import com.decagon.n26_p3_usecase.features.todo.data.dao.TodoDao
 import com.decagon.n26_p3_usecase.features.todo.model.TodoData
@@ -17,6 +18,7 @@ import com.decagon.n26_p3_usecase.features.todo.model.TodoData
 abstract class AppVerseDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
     abstract fun runDao(): RunDao
+    abstract fun runMediatorDao(): RunMediatorDao
 
     companion object {
 

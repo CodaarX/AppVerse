@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.decagon.n26_p3_usecase.commons.utils.hideView
-import com.decagon.n26_p3_usecase.commons.utils.showView
+import com.decagon.n26_p3_usecase.commons.ui.hideView
+import com.decagon.n26_p3_usecase.commons.ui.showView
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
 import com.decagon.n26_p3_usecase.databinding.FragmentQRGeneratorBinding
 import com.decagon.n26_p3_usecase.features.qrCode.model.QRDetails

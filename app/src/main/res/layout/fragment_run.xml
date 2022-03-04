@@ -6,30 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".features.locationTracker.presentation.viewController.RunFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <Spinner
-            android:id="@+id/spFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/filter_options"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvFilterBy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sort by:"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/spFilter"
-            app:layout_constraintEnd_toStartOf="@+id/spFilter"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRuns"
@@ -39,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spFilter" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,34 +45,34 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/runs_layout"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_weight="3"-->
-<!--                android:background="?attr/selectableItemBackground"-->
-<!--                android:gravity="center"-->
-<!--                android:orientation="vertical">-->
+            <LinearLayout
+                android:id="@+id/sort_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="vertical">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/run_icon"-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    android:padding="0dp"-->
-<!--                    app:srcCompat="@drawable/ic_run"-->
-<!--                    app:tint="@android:color/white" />-->
+                <ImageView
+                    android:id="@+id/sort_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="0dp"
+                    app:srcCompat="@drawable/ic_baseline_sort_24"
+                    app:tint="@android:color/white" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/runs_textView"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:gravity="center"-->
-<!--                    android:text="Your Run"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="12sp" />-->
+                <TextView
+                    android:id="@+id/sort_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Sort"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
-<!--            </LinearLayout>-->
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/statistics_layout"
                 android:layout_width="0dp"
@@ -157,6 +136,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/settings_icon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:padding="0dp"
@@ -173,6 +153,35 @@
                     android:textSize="12sp" />
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/delete_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/delete_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="0dp"
+                    app:srcCompat="@drawable/ic_delete"
+                    app:tint="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/delete_all_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Delete"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

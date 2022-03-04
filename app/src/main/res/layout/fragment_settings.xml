@@ -137,6 +137,18 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/settings_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/statistics_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -164,43 +176,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/settings_layout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="3"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:padding="0dp"
-                    app:srcCompat="@drawable/ic_settings"
-                    app:tint="@android:color/white" />
-
-                <TextView
-                    android:id="@+id/settings_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Settings"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
 
         </LinearLayout>
 

@@ -1,18 +1,12 @@
 package com.decagon.n26_p3_usecase.features.todo.presentation.viewModel
 
 import android.app.Application
-import android.graphics.Color.red
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.log
 import com.decagon.n26_p3_usecase.features.todo.model.Priority
-import com.decagon.n26_p3_usecase.features.todo.model.TodoData
 
 class TodoSharedViewModel(application: Application) : AndroidViewModel(application) {
 

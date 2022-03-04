@@ -7,7 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import com.decagon.n26_p3_usecase.commons.utils.toast
+import com.decagon.n26_p3_usecase.commons.ui.toast
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream

@@ -1,23 +1,11 @@
 package com.decagon.n26_p3_usecase.features.qrCode.utils
 
-import android.R.attr
-import android.widget.Toast
-
 import com.google.zxing.common.HybridBinarizer
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.util.Log
-import androidx.test.core.app.ApplicationProvider
-import com.decagon.n26_p3_usecase.commons.utils.log
-import com.decagon.n26_p3_usecase.commons.utils.toast
+import com.decagon.n26_p3_usecase.commons.ui.log
 import com.google.zxing.*
-import java.io.FileNotFoundException
-import java.io.InputStream
-import kotlin.Result
 
 
 class QRImageDecoder {

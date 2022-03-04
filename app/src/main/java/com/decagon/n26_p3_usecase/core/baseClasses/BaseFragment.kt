@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.R
+import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,4 +27,5 @@ abstract class BaseFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_base, container, false)
     }
+    
 }

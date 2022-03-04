@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.decagon.n26_p3_usecase.commons.utils.toast
+import com.decagon.n26_p3_usecase.commons.ui.toast
 import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentAddTodoBinding
 import com.decagon.n26_p3_usecase.features.todo.model.TodoData

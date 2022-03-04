@@ -1,6 +1,8 @@
 package com.decagon.n26_p3_usecase.features.locateMe.presentation
 
 import `in`.myinnos.savebitmapandsharelib.SaveAndShare
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -8,13 +10,13 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import com.decagon.n26_p3_usecase.R
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.NetworkLiveData
-import com.decagon.n26_p3_usecase.commons.utils.Tools
-import com.decagon.n26_p3_usecase.commons.utils.toast
+import com.decagon.n26_p3_usecase.commons.ui.log
+import com.decagon.n26_p3_usecase.commons.ui.showView
+import com.decagon.n26_p3_usecase.commons.ui.toast
+import com.decagon.n26_p3_usecase.commons.utils.*
 import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentLocationBinding
 import com.decagon.n26_p3_usecase.features.locateMe.utils.MapTools
@@ -27,7 +29,11 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.maps.route.extensions.drawRouteOnMap
+import com.maps.route.extensions.moveCameraOnMap
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.IOException
+
 
 @AndroidEntryPoint
 class LocationFragment : Fragment() {
@@ -35,6 +41,8 @@ class LocationFragment : Fragment() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var binding: FragmentLocationBinding
     private lateinit var mMap: GoogleMap
+    var showingRoute = false
+  //  private lateinit var placesClient : PlacesClient
 
     private val callback = OnMapReadyCallback { gMap ->
         val configuredmap = MapTools.configActivityMaps(gMap)
@@ -45,6 +53,9 @@ class LocationFragment : Fragment() {
         super.onCreate(savedInstanceState)
         LocationProvider.provide(requireContext(), requireActivity() as MainActivity)
         fusedLocationProviderClient = FusedLocationProviderClient(requireActivity())
+//        Places.initialize(requireContext(), getString(R.string.google_maps_key))
+//        placesClient = Places.createClient(requireContext())
+
     }
 
     override fun onCreateView(
@@ -59,16 +70,15 @@ class LocationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Tools.setSystemBarColor(requireActivity(), R.color.colorPrimary)
-        (activity as MainActivity).supportActionBar?.title = "My Location"
+//        Tools.setSystemBarLight(requireActivity())
+        setTitle("My Location")
+//        initializePlaces()
+
         setClickListeners()
         buildMap()
     }
 
     private fun setClickListeners(){
-        binding.listButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Map Clicked", Toast.LENGTH_SHORT).show()
-        }
-
         binding.locateMeButton.setOnClickListener {
             NetworkLiveData.observe(viewLifecycleOwner) {
                 if (it) {
@@ -80,14 +90,64 @@ class LocationFragment : Fragment() {
         }
 
         binding.directionButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Add Clicked", Toast.LENGTH_SHORT)
-                .show()
+
+            binding.locationDestination.showView()
+            binding.locationSearchBoxButton.setOnClickListener {
+                NetworkLiveData.observe(viewLifecycleOwner) {
+                    if (it) {
+                        val destination = binding.textViewDestination.text.toString()
+                        log("destination-------------- $destination")
+                        if (destination.isNotEmpty()) {
+                            drawDirection(destination)
+                        } else {
+                            log("Please enter a destination $destination")
+                            toast(requireContext(), "Please enter a valid destination")
+                        }
+                    } else {
+                        log("No Internet Connection")
+                        toast(requireContext(), "No Internet Connection")
+                    }
+                }
+            }
+            NetworkLiveData.removeObservers(viewLifecycleOwner)
         }
 
         binding.shareButton.setOnClickListener {
             shareLocationSnapShot()
         }
     }
+
+
+//    private fun initializePlaces(){
+//        val autoCompleteSupportMapFragment = (AutocompleteSupportFragment())
+//        childFragmentManager.findFragmentById(R.id.my_location_map)
+//        autoCompleteSupportMapFragment.apply {
+//            setTypeFilter(TypeFilter.ADDRESS)
+//            setLocationBias(
+//                RectangularBounds.newInstance(
+//                    LatLng(2.69170169436 ,14.5771777686, ),
+//                    LatLng(13.8659239771, 4.24059418377)
+//                )
+//            )
+//            setCountries("NG") // set the country
+//            setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+//        }
+//
+//        object : PlaceSelectionListener {
+//            override fun onPlaceSelected(p0: Place) {
+//                log("Place Selected ${p0.name}")
+//               // binding.textViewDestination.setText(p0.name)
+//                p0.name?.let {
+//                    drawDirection(it)
+//                }
+//            }
+//
+//            override fun onError(p0: Status) {
+//                log("Error ${p0.statusMessage}")
+//            }
+//        }
+//    }
+
 
     private fun shareLocationSnapShot(){
         mMap.snapshot { bitmap ->
@@ -129,18 +189,67 @@ class LocationFragment : Fragment() {
 
             val mLastLocation: Location = result.lastLocation
 
-            val nowLocation = LatLng(
-                mLastLocation.latitude,
-                mLastLocation.longitude
-            )
+            if(!showingRoute){
+                val nowLocation = LatLng(
+                    mLastLocation.latitude,
+                    mLastLocation.longitude
+                )
 
-            if (::mMap.isInitialized) {
-                mMap.clear()
-                mMap.addMarker(MarkerOptions().position(nowLocation).title("You are here"))
-                mMap.animateCamera(zoomingLocation(nowLocation))
+                if (::mMap.isInitialized) {
+                    mMap.clear()
+                    mMap.addMarker(MarkerOptions().position(nowLocation).title("You are here"))
+                    mMap.animateCamera(zoomingLocation(nowLocation))
+                }
             }
         }
     }
+
+    private fun drawDirection(location: String){
+
+        showingRoute = true
+        val origin = mMap.cameraPosition.target
+        val destinationCoordinates = getDestination(location)
+
+        val source = LatLng(origin.latitude, origin.longitude) //starting point (LatLng)
+        val destination = LatLng(destinationCoordinates.latitude, destinationCoordinates.longitude) // ending point (LatLng)
+
+        if(showingRoute){
+
+            mMap.run {
+
+                moveCameraOnMap(latLng = source) // if you want to zoom the map to any point
+
+                //Called the drawRouteOnMap extension to draw the polyline/route on google maps
+                drawRouteOnMap(
+                    getString(R.string.google_maps_key), //your API key
+                    source = source, // Source from where you want to draw path
+                    destination = destination, // destination to where you want to draw path
+                    context = context!! //Activity context
+                ) {
+                    //drawRouteOnMap is a extension function which takes the required parameters and draws the polyline on the map
+                    // it?.duration
+                }
+            }
+        }
+    }
+
+    private fun getDestination(location: String): LatLng{
+        var addressList: List<Address>? = null
+
+        val geocoder = Geocoder(requireContext())
+        try {
+            addressList = geocoder.getFromLocationName(location, 1)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        val address: Address = addressList!![0]
+        return LatLng(address.latitude, address.longitude)
+    }
+
+    private fun setTitle(title: String) {
+        (activity as MainActivity).supportActionBar?.title = title
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

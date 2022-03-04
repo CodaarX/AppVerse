@@ -1,15 +1,13 @@
 package com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewController
 
 import android.R
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.decagon.n26_p3_usecase.commons.ui.*
 import com.decagon.n26_p3_usecase.commons.utils.*
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
 import com.decagon.n26_p3_usecase.core.presentation.MainActivity

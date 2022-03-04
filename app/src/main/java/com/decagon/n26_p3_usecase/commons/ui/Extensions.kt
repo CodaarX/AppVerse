@@ -1,22 +1,20 @@
-package com.decagon.n26_p3_usecase.commons.utils
+package com.decagon.n26_p3_usecase.commons.ui
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.getSystemService
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.TrackLocationActivity
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
 
+@SuppressLint("LogNotTimber")
 fun <T> log(value : T){
     Log.i("INFORMATION", "log: ${value}")
 }
@@ -50,5 +48,5 @@ fun View.showView(){
 }
 
 fun <T> timber(message: T){
-    Timber.d("TIMBER: ${message}")
+    Timber.d("TIMBER: $message")
 }

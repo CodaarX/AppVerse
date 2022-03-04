@@ -120,6 +120,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/wallpaper_feature"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="?attr/selectableItemBackground"
@@ -142,7 +143,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Pictures"
+                                        android:text="Wall Papers"
                                         android:textColor="@android:color/white" />
 
                                 </LinearLayout>

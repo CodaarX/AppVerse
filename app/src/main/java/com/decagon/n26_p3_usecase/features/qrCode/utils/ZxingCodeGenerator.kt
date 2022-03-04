@@ -1,17 +1,14 @@
 package com.decagon.n26_p3_usecase.features.qrCode.utils
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
-import com.decagon.n26_p3_usecase.commons.utils.log
+import com.decagon.n26_p3_usecase.commons.ui.log
 import com.decagon.n26_p3_usecase.features.qrCode.encoder.generatorContract.BarCodeGenerator
 import com.decagon.n26_p3_usecase.features.qrCode.model.QRDetails
-import com.decagon.n26_p3_usecase.features.qrCode.utils.ClassConverter.gson
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 
 class ZxingCodeGenerator (val data : QRDetails) : BarCodeGenerator {
 

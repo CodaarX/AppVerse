@@ -165,9 +165,27 @@ dependencies {
 
 
     // WorkManager
-    implementation "android.arch.work:work-runtime-ktx:1.0.0-alpha10"
+    implementation "android.arch.work:work-runtime-ktx:1.0.1"
 
     // save and share iamge
     implementation 'com.github.myinnos:ImageSaveandShare:1.0.3'
-    
+
+    // map direction
+    implementation 'com.github.malikdawar:drawroute:1.5'
+
+    // places sdk
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+
+    // Mike utils
+    implementation 'com.github.CodaarX:mike-lambda:1.0.2'
+
+    // color pallete library
+    implementation 'com.android.support:palette-v7:30.0.0'
+
+    // Coil
+    implementation "io.coil-kt:coil:1.1.1"
+    implementation "com.google.accompanist:accompanist-coil:0.7.0"
+
+
+
 }

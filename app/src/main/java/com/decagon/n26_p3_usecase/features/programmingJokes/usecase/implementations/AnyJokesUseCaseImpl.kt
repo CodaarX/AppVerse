@@ -1,6 +1,6 @@
 package com.decagon.n26_p3_usecase.features.programmingJokes.usecase.implementations
 
-import com.decagon.n26_p3_usecase.core.baseClasses.BaseRepositoryRemoteOperation
+import com.decagon.n26_p3_usecase.core.data.BaseRepositoryRemoteOperation
 import com.decagon.n26_p3_usecase.features.programmingJokes.repository.contracts.JokesRepository
 import com.decagon.n26_p3_usecase.commons.utils.Resource
 import com.decagon.n26_p3_usecase.features.programmingJokes.model.toJokesModelSafe

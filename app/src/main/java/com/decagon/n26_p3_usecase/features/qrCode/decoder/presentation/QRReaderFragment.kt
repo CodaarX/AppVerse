@@ -2,7 +2,6 @@ package com.decagon.n26_p3_usecase.features.qrCode.decoder.presentation
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
@@ -16,10 +15,10 @@ import com.opensooq.supernova.gligar.GligarPicker
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.hideView
-import com.decagon.n26_p3_usecase.commons.utils.log
-import com.decagon.n26_p3_usecase.commons.utils.showView
-import com.decagon.n26_p3_usecase.commons.utils.toast
+import com.decagon.n26_p3_usecase.commons.ui.hideView
+import com.decagon.n26_p3_usecase.commons.ui.log
+import com.decagon.n26_p3_usecase.commons.ui.showView
+import com.decagon.n26_p3_usecase.commons.ui.toast
 import com.decagon.n26_p3_usecase.features.qrCode.utils.QRImageDecoder
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -29,17 +28,8 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener
 import com.karumi.dexter.listener.single.PermissionListener
 import me.dm7.barcodescanner.zxing.ZXingScannerView
-import android.widget.Toast
 
-import com.google.zxing.common.HybridBinarizer
-
-import android.graphics.BitmapFactory
-import android.net.Uri
-import androidx.test.core.app.ApplicationProvider
 import com.google.zxing.*
-import java.io.FileNotFoundException
-import java.io.InputStream
-import java.lang.Exception
 
 
 class QRReaderFragment : BaseFragment(), ZXingScannerView.ResultHandler {

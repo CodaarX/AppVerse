@@ -1,13 +1,10 @@
 package com.decagon.n26_p3_usecase.features.locationTracker.utils
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Environment
-import android.util.Log
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
-import com.decagon.n26_p3_usecase.commons.utils.log
+import com.decagon.n26_p3_usecase.commons.ui.log
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream

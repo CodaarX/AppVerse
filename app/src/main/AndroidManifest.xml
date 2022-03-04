@@ -25,6 +25,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <activity
+            android:name=".WallPaperActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyActivity"
+            android:exported="false" />
+        <activity
             android:name=".LocationActivity"
             android:exported="false" />
         <activity

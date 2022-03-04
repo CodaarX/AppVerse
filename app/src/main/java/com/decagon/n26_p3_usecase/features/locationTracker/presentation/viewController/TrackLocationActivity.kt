@@ -3,13 +3,9 @@ package com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewCon
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.hideView
 import com.decagon.n26_p3_usecase.databinding.ActivityTrackLocationBinding
 import com.decagon.n26_p3_usecase.features.locationTracker.utils.TrackingUtils
 import dagger.hilt.android.AndroidEntryPoint

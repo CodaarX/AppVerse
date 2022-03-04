@@ -12,23 +12,23 @@ class RunningTrackerRepositoryImpl @Inject constructor (private val database: Ap
 
     override suspend fun deleteRun(run: Run) = database.runDao().delete(run)
 
-    override fun getAllRunsSortedByDate(): LiveData<List<Run>> = database.runDao().getAllRunSortedByDate()
+    override suspend fun getAllRunsSortedByDate(): List<Run> = database.runDao().getAllRunSortedByDate()
 
-    override fun getAllRunsSortedByDistance(): LiveData<List<Run>> = database.runDao().getAllRunSortedByDistance()
+    override suspend fun getAllRunsSortedByDistance(): List<Run> = database.runDao().getAllRunSortedByDistance()
 
-    override fun getAllRunsSortedByTime(): LiveData<List<Run>> = database.runDao().getAllRunSortedByTimeInMills()
+    override suspend fun getAllRunsSortedByTime(): List<Run> = database.runDao().getAllRunSortedByTimeInMills()
 
-    override fun getAllRunsSortedByAvgSpeed(): LiveData<List<Run>> = database.runDao().getAllRunSortedByAverageSpeed()
+    override suspend fun getAllRunsSortedByAvgSpeed(): List<Run> = database.runDao().getAllRunSortedByAverageSpeed()
 
-    override fun getAllRunsSortedByCaloriesBurned(): LiveData<List<Run>> = database.runDao().getAllRunSortedByCaloriesBurned()
+    override suspend fun getAllRunsSortedByCaloriesBurned(): List<Run> = database.runDao().getAllRunSortedByCaloriesBurned()
 
-    override fun getTotalTimeInMillis(): LiveData<Long> =  database.runDao().getTotalTimeInMillis()
+    override suspend fun getTotalTimeInMillis(): Long =  database.runDao().getTotalTimeInMillis()
 
-    override fun getTotalDistanceInMeters(): LiveData<Int> = database.runDao().getTotalDistanceInMeters()
+    override suspend fun getTotalDistanceInMeters(): Int = database.runDao().getTotalDistanceInMeters()
 
-    override fun getTotalCaloriesBurned(): LiveData<Int> = database.runDao().getTotalCaloriesBurned()
+    override suspend fun getTotalCaloriesBurned(): Int = database.runDao().getTotalCaloriesBurned()
 
-    override fun getTotalAvgSpeed(): LiveData<Long> = database.runDao().getTotalAverageSpeed()
+    override suspend fun getTotalAvgSpeed(): Long = database.runDao().getTotalAverageSpeed()
 
 //    override fun getTotalRuns(): LiveData<Float> = database.runDao().getTotalRuns()
 

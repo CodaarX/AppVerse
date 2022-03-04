@@ -46,5 +46,4 @@ object NetworkModule {
             .build()
     }
 
-
 }

@@ -1,15 +1,13 @@
-package com.decagon.n26_p3_usecase.core.baseClasses
+package com.decagon.n26_p3_usecase.core.data
 
 import com.decagon.n26_p3_usecase.commons.utils.Resource
-import com.decagon.n26_p3_usecase.features.programmingJokes.model.JokeModelRaw
-import com.decagon.n26_p3_usecase.features.programmingJokes.model.toJokesModelSafe
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
 abstract class BaseRepositoryRemoteOperation {
-    suspend fun <T> getData (apiCall: suspend () -> Response<T>) : Flow<Resource<T>> =
 
+    suspend inline fun <T> getData (crossinline apiCall: suspend () -> Response<T>) : Flow<Resource<T>> =
             flow {
                 emit (
                     try {
@@ -19,11 +17,7 @@ abstract class BaseRepositoryRemoteOperation {
                         val result = response.body()
 
                         if (result != null && response.isSuccessful) {
-                            when (result) {
-                               is JokeModelRaw -> Resource.Success<T>(result.toJokesModelSafe() as T)
-
-                                else -> Resource.Empty()
-                            }
+                            Resource.Success(result as T)
                          } else {
                             Resource.Error(response.message())
                         }

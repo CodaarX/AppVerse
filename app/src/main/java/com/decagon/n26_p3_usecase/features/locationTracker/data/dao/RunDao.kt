@@ -15,31 +15,31 @@ interface RunDao {
     suspend fun delete(run: Run)
 
     @Query("SELECT * FROM running_table ORDER BY timestamp DESC")
-    fun getAllRunSortedByDate(): LiveData<List<Run>>
+    suspend fun getAllRunSortedByDate(): List<Run>
 
     @Query("SELECT * FROM running_table ORDER BY timeInMillis DESC")
-    fun getAllRunSortedByTimeInMills(): LiveData<List<Run>>
+    suspend fun getAllRunSortedByTimeInMills(): List<Run>
 
     @Query("SELECT * FROM running_table ORDER BY caloriesBurned DESC")
-    fun getAllRunSortedByCaloriesBurned(): LiveData<List<Run>>
+    suspend fun getAllRunSortedByCaloriesBurned(): List<Run>
 
     @Query("SELECT * FROM running_table ORDER BY avgSpeed DESC")
-    fun getAllRunSortedByAverageSpeed(): LiveData<List<Run>>
+    suspend fun getAllRunSortedByAverageSpeed(): List<Run>
 
     @Query("SELECT * FROM running_table ORDER BY distanceInMeters DESC")
-    fun getAllRunSortedByDistance(): LiveData<List<Run>>
+    suspend fun getAllRunSortedByDistance(): List<Run>
 
     @Query("SELECT SUM(timeInMillis) FROM running_table")
-    fun getTotalTimeInMillis(): LiveData<Long>
+    suspend fun getTotalTimeInMillis(): Long
 
     @Query("SELECT SUM(distanceInMeters) FROM running_table")
-    fun getTotalDistanceInMeters(): LiveData<Int>
+    suspend fun getTotalDistanceInMeters(): Int
 
     @Query("SELECT SUM(caloriesBurned) FROM running_table")
-    fun getTotalCaloriesBurned(): LiveData<Int>
+    suspend fun getTotalCaloriesBurned(): Int
 
     @Query("SELECT AVG(avgSpeed) FROM running_table")
-    fun getTotalAverageSpeed(): LiveData<Long>
+    suspend fun getTotalAverageSpeed(): Long
 //
 //    @Query("SELECT * FROM running_table")
 //    fun getTotalRuns(): LiveData<Float>

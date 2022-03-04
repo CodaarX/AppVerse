@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.timber
+import com.decagon.n26_p3_usecase.commons.ui.timber
 import com.decagon.n26_p3_usecase.features.locationTracker.utils.TrackingUtils
 import com.decagon.n26_p3_usecase.features.locationTracker.utils.TrackingUtils.NOTIFICATION_ID
 import com.google.android.gms.location.FusedLocationProviderClient

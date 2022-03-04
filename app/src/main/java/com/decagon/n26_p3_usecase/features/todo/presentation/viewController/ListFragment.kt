@@ -1,7 +1,6 @@
 package com.decagon.n26_p3_usecase.features.todo.presentation.viewController
 
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,7 +11,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,9 +19,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.hideView
-import com.decagon.n26_p3_usecase.commons.utils.showView
-import com.decagon.n26_p3_usecase.commons.utils.toast
+import com.decagon.n26_p3_usecase.commons.utils.GenericDialogueBuilder
+import com.decagon.n26_p3_usecase.commons.ui.hideView
+import com.decagon.n26_p3_usecase.commons.ui.showView
+import com.decagon.n26_p3_usecase.commons.ui.toast
 import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.databinding.FragmentListBinding
@@ -44,7 +43,6 @@ class ListFragment : Fragment() {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
-
 
     private val adapter: TodoListAdapter by lazy { TodoListAdapter() }
     private val todoViewModel: TodoViewModel by viewModels()
@@ -213,8 +211,6 @@ class ListFragment : Fragment() {
                 lowPriorityButton?.setOnClickListener {
                     if (sharedPreference.loadFromSharedPref<Boolean>("Boolean", "sortedByDesc")) {
                         todoViewModel.sortByLowPriority.observe(viewLifecycleOwner) { adapter.setTodos(it) }
-//                    binding.sortIcon.setImageResource(R.drawable.ic_baseline_arrow_upward_24)
-//                    binding.sortListTextView.text = "Sort by High Priority"
                         sharedPreference.saveToSharedPref("sortedByDesc", false)
                     } else {
                         toast(requireContext(), "Already sorted by LOW Priority")
@@ -228,12 +224,8 @@ class ListFragment : Fragment() {
                         toast(requireContext(), "Already sorted by HIGH Priority")
                     } else {
                         todoViewModel.sortByHighPriority.observe(viewLifecycleOwner) { adapter.setTodos(it) }
-//                    binding.sortIcon.setImageResource(R.drawable.ic_baseline_arrow_downward_24)
-//                    binding.sortListTextView.text = "Sort by Low Priority"
                         sharedPreference.saveToSharedPref("sortedByDesc", true)
                     }
-
-
                     dialog.dismiss()
                 }
 
@@ -242,19 +234,14 @@ class ListFragment : Fragment() {
             }
 
     private fun confirmRemoval() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Delete everything?")
-        builder.setMessage("Are you sure you want to clear all todos?")
-        builder.setPositiveButton("Yes") { _, _ ->
-            todoViewModel.deleteAllTodo()
-            observeLiveData()
-            toast(requireContext(), "Successfully removed all todos")
-        }
-        builder.setNegativeButton("No") { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
+        GenericDialogueBuilder.showDialogue(requireContext(), R.style.Theme_AppCompat_Dialog_Alert,
+            "Are you sure you want to delete all the todos?",
+            "Delete All",
+            R.drawable.ic_delete,
+            "Delete All",
+            "Cancel",
+            { todoViewModel.deleteAllTodo() },
+            { toast(requireContext(), "Cancelled") })
     }
 
     fun hideKeyboard() {
@@ -272,14 +259,14 @@ class ListFragment : Fragment() {
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    android.app.AlertDialog.Builder(requireContext())
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Exit App")
-                        .setMessage("Are you sure you want to exit this application?")
-                        .setPositiveButton("Yes",
-                            DialogInterface.OnClickListener { dialog, which -> requireActivity().finish() })
-                        .setNegativeButton("No", null)
-                        .show()
+                    GenericDialogueBuilder.showDialogue(requireContext(), R.style.Theme_AppCompat_Dialog_Alert,
+                        "Are you sure you want to exit?",
+                        "Exit",
+                        R.drawable.ic_baseline_logout_24,
+                        "Exit",
+                        "Cancel",
+                        { activity?.finish() },
+                        { toast(requireContext(), "Cancelled") })
                 }
             })
 

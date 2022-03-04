@@ -13,6 +13,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.databinding.ActivityTodoBinding
 import com.decagon.n26_p3_usecase.features.qrCode.QRCodeActivity
+import com.example.mike_utils.MikeGlide
+import com.example.mike_utils.MikeUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,7 +28,6 @@ class TodoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTodoBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
 
         // Set up the action bar.
         setupActionBarWithNavController(findNavController(R.id.nav_host_fragment))

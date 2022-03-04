@@ -19,14 +19,14 @@ class SharedPreference @Inject constructor(private val sharedPreferences: Shared
     }
 
     /*Save details to Shared Preferences*/
-    fun <T> saveToSharedPref( prefKey : String, prefType : T) {
+    fun <T> saveToSharedPref( prefKey : String, prefValue : T) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        when (prefType) {
-            is String -> editor.putString(prefKey, prefType)
-            is Boolean -> editor.putBoolean(prefKey, prefType)
-            is Int -> editor.putInt(prefKey, prefType)
-            is Float -> editor.putFloat(prefKey, prefType)
-            is Long -> editor.putLong(prefKey, prefType)
+        when (prefValue) {
+            is String -> editor.putString(prefKey, prefValue)
+            is Boolean -> editor.putBoolean(prefKey, prefValue)
+            is Int -> editor.putInt(prefKey, prefValue)
+            is Float -> editor.putFloat(prefKey, prefValue)
+            is Long -> editor.putLong(prefKey, prefValue)
         }
         editor.apply()
     }

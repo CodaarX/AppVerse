@@ -1,7 +1,6 @@
-package com.decagon.edconnect.utils.animations
+package com.decagon.n26_p3_usecase.commons.ui.animations
 
 import android.view.View
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import kotlin.math.abs
 

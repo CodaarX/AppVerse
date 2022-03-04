@@ -41,5 +41,7 @@
         <item>Calories Burned</item>
     </string-array>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">ENTER YOUR API KEY HERE</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
 
 </resources>

@@ -22,8 +22,12 @@ import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.databinding.ActivityMainBinding
 import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.TrackLocationActivity
+import com.example.mike_utils.MikeNetworkLiveData
+import com.example.mike_utils.MikePermission
+import com.example.mike_utils.MikeUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.jar.Manifest
 import javax.inject.Inject
 
 
@@ -39,7 +43,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var content_view: CardView
     private lateinit var navController: NavController
     private var isHide = true
-    private val width_content = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initNavigationMenu()
         initNavController()
+
 
 //      Color.BLUE
 //      val bar: android.app.ActionBar? = actionBar
@@ -176,6 +180,7 @@ class MainActivity : AppCompatActivity() {
             binding?.todoFeature -> navigateTo(R.id.todo_navigation)
             binding?.jokeFeature -> navigateTo(R.id.jokes_navigator)
             binding?.mapFeature -> navigateTo(R.id.locationFragment)
+            binding?.wallpaperFeature -> navigateTo(R.id.wallPaperFragment)
             binding?.runningTrackerFeature -> {
                 if (sharedPreference.loadFromSharedPref("Boolean", "runner_set")){
                     navigateTo(R.id.run_tracker_navigator)

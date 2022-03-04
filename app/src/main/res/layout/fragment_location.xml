@@ -17,6 +17,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/location_destination"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_xmlarge"
+        android:layout_margin="@dimen/spacing_mlarge"
+        android:clipToPadding="false"
+        app:cardBackgroundColor="@color/grey_700"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
+        android:visibility="invisible"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/spacing_xmlarge"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:padding="@dimen/spacing_middle"
+                app:srcCompat="@drawable/ic_location"
+                app:tint="@color/white" />
+
+            <EditText
+                android:id="@+id/text_view_destination"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/to"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white">
+
+                <requestFocus />
+
+            </EditText>
+
+            <ImageView
+                android:id="@+id/location_SearchBox_button"
+                android:layout_width="@dimen/spacing_xmlarge"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:padding="@dimen/spacing_middle"
+                app:srcCompat="@drawable/ic_baseline_search_24"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/locate_me_button"
         android:layout_width="wrap_content"
@@ -46,6 +102,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
+            android:id="@+id/direction_button_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -61,14 +118,6 @@
                 app:srcCompat="@drawable/ic_near_me"
                 app:tint="@color/colorPrimary" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Direction"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
-
         </LinearLayout>
 
         <View
@@ -81,16 +130,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/spacing_medium">
-
-            <ImageButton
-                android:id="@+id/list_button"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_marginHorizontal="10dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:srcCompat="@drawable/ic_baseline_search_24"
-                app:tint="@color/colorPrimary" />
-
 
             <ImageButton
                 android:id="@+id/share_button"
