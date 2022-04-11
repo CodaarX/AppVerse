@@ -1,7 +1,6 @@
 package com.decagon.n26_p3_usecase.core.data.preferences
 
 import android.content.SharedPreferences
-import android.util.Patterns
 import javax.inject.Inject
 
 class SharedPreference @Inject constructor(private val sharedPreferences: SharedPreferences) {
@@ -19,7 +18,7 @@ class SharedPreference @Inject constructor(private val sharedPreferences: Shared
     }
 
     /*Save details to Shared Preferences*/
-    fun <T> saveToSharedPref( prefKey : String, prefValue : T) {
+    fun <T> saveToSharedPref(prefKey: String, prefValue: T) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         when (prefValue) {
             is String -> editor.putString(prefKey, prefValue)

@@ -23,7 +23,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 // create a generic recycler view adapter
-class GenericRecyclerViewAdapter<T>(private val items: List<T>, private val layout: Int) : RecyclerView.Adapter<GenericRecyclerViewAdapter.GenericViewHolder<T>>() {
+class GenericRecyclerViewAdapter<T>(private val items: List<T>, private val layout: Int)
+
+    : RecyclerView.Adapter<GenericRecyclerViewAdapter.GenericViewHolder<T>>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<T>(){
         override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
@@ -38,7 +40,6 @@ class GenericRecyclerViewAdapter<T>(private val items: List<T>, private val layo
     val differ = AsyncListDiffer(this, diffCallback)
 
     fun submitList(list: List<T>) = differ.submitList(list)
-
 
     enum class  LayoutType{
         TODO, RUNS, JOKES
@@ -66,7 +67,7 @@ class GenericRecyclerViewAdapter<T>(private val items: List<T>, private val layo
         }
     }
 
-    override fun getItemCount(): Int { return differ.currentList.size }
+    override fun getItemCount(): Int = differ.currentList.size // items.size
 
     override fun onBindViewHolder(holder: GenericViewHolder<T>, position: Int) {
 
@@ -154,6 +155,7 @@ class GenericRecyclerViewAdapter<T>(private val items: List<T>, private val layo
            }
        }
     }
+
 }
 
 

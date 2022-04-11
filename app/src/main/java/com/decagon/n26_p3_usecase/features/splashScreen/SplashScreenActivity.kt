@@ -3,23 +3,26 @@ package com.decagon.n26_p3_usecase.features.splashScreen
 import android.content.Intent
 import android.media.VolumeShaper
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.R
 import com.decagon.n26_p3_usecase.commons.ui.animations.Animator
 import com.decagon.n26_p3_usecase.commons.ui.showView
 import com.decagon.n26_p3_usecase.commons.ui.toast
+import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.ActivitySplashScreenBinding
 import com.example.mike_utils.MikeUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import io.bloco.faker.Faker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
@@ -29,6 +32,8 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private val binding get() = _binding!!
     private var _binding: ActivitySplashScreenBinding? = null
+
+    var faker = Faker()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +45,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         val notFirstTime = sharedPreference.loadFromSharedPref<Boolean>("Boolean", "firstTime")
 
-        if (notFirstTime){
+        if (notFirstTime) {
             binding.welcomeToTextView.showView()
             val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
             startActivity(intent)
@@ -55,7 +60,7 @@ class SplashScreenActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 delay(3000L)
                 withContext(Dispatchers.Main) {
-                    val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                    val intent = Intent(this@SplashScreenActivity, MainActivity::class.java) //
                     sharedPreference.saveToSharedPref("firstTime", true)
                     startActivity(intent)
                     Animator.animateActivityFadeContext(this@SplashScreenActivity)
@@ -63,11 +68,9 @@ class SplashScreenActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
-
-    private fun startAnimation(){
+    private fun startAnimation() {
         val logo = binding.logoImageView
         val welcomeView = binding.welcomeToTextView
         val explorerView = binding.articleExplorerTextView
@@ -105,5 +108,4 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
-
 }

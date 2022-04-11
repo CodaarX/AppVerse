@@ -38,7 +38,6 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.ToDoViewHolder>()
         holder.toDoHeader.text = todos[position].title
         holder.toDoDescription.text = todos[position].description
 
-
         val action = ListFragmentDirections.actionListFragmentToUpdateFragment(todos[position])
         holder.recyclerViewLayout.setOnClickListener { holder.itemView.findNavController().navigate(action) }
 

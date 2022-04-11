@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.decagon.n26_p3_usecase.commons.ui.*
 import com.decagon.n26_p3_usecase.commons.utils.*
 import com.decagon.n26_p3_usecase.core.baseClasses.BaseFragment
@@ -14,18 +15,16 @@ import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentProgrammingJokesBinding
 import com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewModel.JokeViewModel
 import com.decagon.n26_p3_usecase.features.programmingJokes.utils.JokesConstants
+import com.decagon.n26_p3_usecase.features.wallpaper.utils.WallPaperConstants
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProgrammingJokesFragment : BaseFragment() {
 
     private var binding : FragmentProgrammingJokesBinding? = null
     private  val viewModel : JokeViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedPreference.saveToSharedPref("BASE_URL", JokesConstants.JOKES_BASE_URL)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +45,6 @@ class ProgrammingJokesFragment : BaseFragment() {
         binding!!.snackBar.hideView()
         binding!!.answerViewTwo.hideView()
 
-
-        NetworkLiveData.observeForever {
-
-        }
-
-//      verifyExit()
     }
 
 
@@ -59,6 +52,7 @@ class ProgrammingJokesFragment : BaseFragment() {
         super.onResume()
 
         binding!!.getJokes.setOnClickListener {
+
             if (NetworkLiveData.isNetworkAvailable()) viewModel.getProgrammingJokes() else toast(requireContext(), "No Network available.")
             binding!!.revealAnswer.hideView()
             binding!!.answerViewTwo.hideView()

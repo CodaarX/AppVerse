@@ -1,4 +1,4 @@
-package com.decagon.n26_p3_usecase.features.wallpaper.data
+package com.decagon.n26_p3_usecase.features.quotes.data
 
 import com.decagon.n26_p3_usecase.features.wallpaper.model.WallPaperResponse
 import retrofit2.Response
@@ -11,7 +11,8 @@ interface WallpaperService {
     suspend fun getWallpaper(
         @Query("query") query: String,
         @Query("client_id") client_id: String,
-        @Query("per_page") per_page: Int
+        @Query("per_page") per_page: Int,
+        @Query("page") page: Int
     ): Response<WallPaperResponse>
 
 

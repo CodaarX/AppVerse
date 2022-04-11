@@ -36,7 +36,7 @@
                     <LinearLayout
                         android:id="@+id/menu_linear"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <androidx.core.widget.NestedScrollView
@@ -57,12 +57,12 @@
                                     android:layout_marginBottom="@dimen/spacing_middle"
                                     android:paddingLeft="@dimen/spacing_middle"
                                     android:paddingRight="@dimen/spacing_middle"
-                                    android:text="MEDIA"
+                                    android:text="MENU"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textColor="@color/grey_20" />
 
                                 <LinearLayout
-                                    android:id="@+id/radio_feature"
+                                    android:id="@+id/todo_feature"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="?attr/selectableItemBackground"
@@ -80,41 +80,13 @@
                                         android:layout_width="@dimen/spacing_mlarge"
                                         android:layout_height="@dimen/spacing_mlarge"
                                         android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_radio_24"
+                                        app:srcCompat="@drawable/ic_baseline_download_done_24"
                                         app:tint="@android:color/white" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Radio"
-                                        android:textColor="@android:color/white" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="?attr/selectableItemBackground"
-                                    android:clickable="true"
-                                    android:gravity="center_vertical"
-                                    android:onClick="onMenuClick"
-                                    android:orientation="horizontal">
-
-                                    <View
-                                        android:layout_width="@dimen/spacing_middle"
-                                        android:layout_height="0dp" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/spacing_mlarge"
-                                        android:layout_height="@dimen/spacing_mlarge"
-                                        android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_music_note_24"
-                                        app:tint="@android:color/white" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Music"
+                                        android:text="Todo List"
                                         android:textColor="@android:color/white" />
 
                                 </LinearLayout>
@@ -165,13 +137,13 @@
                                         android:layout_width="@dimen/spacing_mlarge"
                                         android:layout_height="@dimen/spacing_mlarge"
                                         android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_blur_on_24"
+                                        app:srcCompat="@drawable/ic_baseline_format_quote_24"
                                         app:tint="@android:color/white" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="News"
+                                        android:text="Quotes"
                                         android:textColor="@android:color/white" />
 
                                 </LinearLayout>
@@ -182,94 +154,10 @@
                                     android:layout_margin="@dimen/spacing_middle"
                                     android:paddingLeft="@dimen/spacing_middle"
                                     android:paddingRight="@dimen/spacing_middle"
-                                    android:text="UTILITIES"
+                                    android:text="LOCATION"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textColor="@color/grey_20" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="?attr/selectableItemBackground"
-                                    android:clickable="true"
-                                    android:gravity="center_vertical"
-                                    android:onClick="onMenuClick"
-                                    android:orientation="horizontal">
-
-                                    <View
-                                        android:layout_width="@dimen/spacing_middle"
-                                        android:layout_height="0dp" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/spacing_mlarge"
-                                        android:layout_height="@dimen/spacing_mlarge"
-                                        android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_picture_as_pdf_24"
-                                        app:tint="@android:color/white" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Pdf reader"
-                                        android:textColor="@android:color/white" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/alarm_feature"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="?attr/selectableItemBackground"
-                                    android:clickable="true"
-                                    android:gravity="center_vertical"
-                                    android:onClick="onMenuClick"
-                                    android:orientation="horizontal">
-
-                                    <View
-                                        android:layout_width="@dimen/spacing_middle"
-                                        android:layout_height="0dp" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/spacing_mlarge"
-                                        android:layout_height="@dimen/spacing_mlarge"
-                                        android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_access_alarm_24"
-                                        app:tint="@android:color/white" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Alarm"
-                                        android:textColor="@android:color/white" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="?attr/selectableItemBackground"
-                                    android:clickable="true"
-                                    android:gravity="center_vertical"
-                                    android:onClick="onMenuClick"
-                                    android:orientation="horizontal">
-
-                                    <View
-                                        android:layout_width="@dimen/spacing_middle"
-                                        android:layout_height="0dp" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/spacing_mlarge"
-                                        android:layout_height="@dimen/spacing_mlarge"
-                                        android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_keyboard_voice_24"
-                                        app:tint="@android:color/white" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Voice recorder"
-                                        android:textColor="@android:color/white" />
-
-                                </LinearLayout>
 
                                 <LinearLayout
                                     android:id="@+id/running_tracker_feature"
@@ -295,50 +183,10 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Running"
+                                        android:text="Running Tracker"
                                         android:textColor="@android:color/white" />
 
                                 </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/bar_code_feature"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="?attr/selectableItemBackground"
-                                    android:clickable="true"
-                                    android:gravity="center_vertical"
-                                    android:onClick="onMenuClick"
-                                    android:orientation="horizontal">
-
-                                    <View
-                                        android:layout_width="@dimen/spacing_middle"
-                                        android:layout_height="0dp" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/spacing_mlarge"
-                                        android:layout_height="@dimen/spacing_mlarge"
-                                        android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_contact_phone_24"
-                                        app:tint="@android:color/white" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Barcode Details"
-                                        android:textColor="@android:color/white" />
-
-                                </LinearLayout>
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/spacing_middle"
-                                    android:paddingLeft="@dimen/spacing_middle"
-                                    android:paddingRight="@dimen/spacing_middle"
-                                    android:text="ADVANCE"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                                    android:textColor="@color/grey_20" />
 
                                 <LinearLayout
                                     android:id="@+id/map_feature"
@@ -369,6 +217,17 @@
 
                                 </LinearLayout>
 
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/spacing_middle"
+                                    android:paddingLeft="@dimen/spacing_middle"
+                                    android:paddingRight="@dimen/spacing_middle"
+                                    android:text="RELAXATION"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textColor="@color/grey_20" />
+
                                 <LinearLayout
                                     android:id="@+id/joke_feature"
                                     android:layout_width="match_parent"
@@ -394,36 +253,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Jokes"
-                                        android:textColor="@android:color/white" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/todo_feature"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="?attr/selectableItemBackground"
-                                    android:clickable="true"
-                                    android:gravity="center_vertical"
-                                    android:onClick="onMenuClick"
-                                    android:orientation="horizontal"
-                                    android:focusable="true">
-
-                                    <View
-                                        android:layout_width="@dimen/spacing_middle"
-                                        android:layout_height="0dp" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/spacing_mlarge"
-                                        android:layout_height="@dimen/spacing_mlarge"
-                                        android:layout_margin="@dimen/spacing_middle"
-                                        app:srcCompat="@drawable/ic_baseline_download_done_24"
-                                        app:tint="@android:color/white" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Todo List"
                                         android:textColor="@android:color/white" />
 
                                 </LinearLayout>

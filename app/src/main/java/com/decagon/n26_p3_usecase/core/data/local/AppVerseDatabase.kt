@@ -11,14 +11,17 @@ import com.decagon.n26_p3_usecase.features.locationTracker.data.mediator.RunMedi
 import com.decagon.n26_p3_usecase.features.locationTracker.model.Run
 import com.decagon.n26_p3_usecase.features.todo.data.dao.TodoDao
 import com.decagon.n26_p3_usecase.features.todo.model.TodoData
+import com.decagon.n26_p3_usecase.features.wallpaper.data.WallpaperDao
+import com.decagon.n26_p3_usecase.features.wallpaper.model.WallPaperDataSafe
 
 
-@Database(entities = [TodoData::class, Run::class], version = 1, exportSchema = false)
+@Database(entities = [TodoData::class, Run::class, WallPaperDataSafe::class], version = 2, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class AppVerseDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
     abstract fun runDao(): RunDao
     abstract fun runMediatorDao(): RunMediatorDao
+    abstract fun wallPaperDao(): WallpaperDao
 
     companion object {
 

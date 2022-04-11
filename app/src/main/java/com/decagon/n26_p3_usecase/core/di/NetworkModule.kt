@@ -36,14 +36,4 @@ object NetworkModule {
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun providesRetrofit(converter : Converter.Factory, client : OkHttpClient, sharedPreference: SharedPreference): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(sharedPreference.loadFromSharedPref("String", "BASE_URL") as String)
-            .client(client)
-            .addConverterFactory(converter)
-            .build()
-    }
-
 }

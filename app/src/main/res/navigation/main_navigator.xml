@@ -9,7 +9,17 @@
         android:id="@+id/programmingJokesFragment"
         android:name="com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewController.ProgrammingJokesFragment"
         android:label="fragment_programming_jokes"
-        tools:layout="@layout/fragment_programming_jokes" />
+        tools:layout="@layout/fragment_programming_jokes" >
+        <action
+            android:id="@+id/action_programmingJokesFragment_to_setUpFragment"
+            app:destination="@id/setUpFragment" />
+        <action
+            android:id="@+id/action_programmingJokesFragment_self"
+            app:destination="@id/programmingJokesFragment" />
+        <action
+            android:id="@+id/action_programmingJokesFragment_to_wallPaperFragment"
+            app:destination="@id/wallPaperFragment" />
+    </fragment>
     <include app:graph="@navigation/qr_navigator" />
     <include app:graph="@navigation/todo_navigation" />
     <include app:graph="@navigation/jokes_navigator" />
@@ -28,6 +38,15 @@
         android:id="@+id/wallPaperFragment"
         android:name="com.decagon.n26_p3_usecase.features.wallpaper.presentation.viewController.WallPaperFragment"
         android:label="fragment_wall_paper"
-        tools:layout="@layout/fragment_wall_paper" />
+        tools:layout="@layout/fragment_wall_paper" >
+        <action
+            android:id="@+id/action_wallPaperFragment_to_favouriteWallPaperFragment"
+            app:destination="@id/favouriteWallPaperFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteWallPaperFragment"
+        android:name="com.decagon.n26_p3_usecase.features.wallpaper.presentation.viewController.FavouriteWallPaperFragment"
+        android:label="fragment_favourite_wall_paper"
+        tools:layout="@layout/fragment_favourite_wall_paper" />
 
 </navigation>

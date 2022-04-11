@@ -1,4 +1,4 @@
-package com.decagon.n26_p3_usecase.features.locateMe.workManager
+package com.decagon.n26_p3_usecase.features.wallpaper.workManager
 
 import android.content.Context
 import androidx.work.Worker
@@ -11,12 +11,15 @@ class WorkManager(context: Context, params: WorkerParameters): Worker(context, p
             // Do the work here
 
             Result.success()
-        } catch (e: Exception) { Result.failure() }
+        } catch (e: Exception) {
+            Result.failure()
+        }
     }
-
 
 
     override fun onStopped() {
         super.onStopped()
     }
+
+
 }

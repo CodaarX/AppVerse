@@ -15,34 +15,39 @@
         <item name="android:windowBackground">#194881</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
+
+    <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light" />
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">#194881</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/app_color</item>
     </style>
+
     <style name="EditText.Grey" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorControlActivated">@color/grey_60</item>
         <item name="colorControlHighlight">@color/grey_60</item>
         <item name="colorControlNormal">@color/grey_40</item>
     </style>
+
     <style name="Theme.MaterialComponents.DayNight.NoActionBar.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.MaterialComponents.DayNight.NoActionBar.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.MaterialComponents.DayNight.NoActionBar.PopupOverlay"
-        parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.MaterialComponents.DayNight.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MaterialComponents.DayNight.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/spinner_drop_down</item>
     </style>
-
-
 
 
 </resources>

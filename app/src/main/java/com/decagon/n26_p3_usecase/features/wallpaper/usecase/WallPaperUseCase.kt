@@ -7,5 +7,12 @@ import com.decagon.n26_p3_usecase.features.wallpaper.model.WallPaperDataSafe
 import kotlinx.coroutines.flow.Flow
 
 interface WallPaperUseCase {
-    suspend operator fun invoke(query: String, clientId: String, per_page: Int) : UiStateManager<MutableList<WallPaperDataSafe>>
+    suspend operator fun invoke(query: String, clientId: String, per_page: Int, pageNumber: Int) : UiStateManager<MutableList<WallPaperDataSafe>>
+
+    suspend fun saveToDataBase(wallPaperDataSafe: WallPaperDataSafe) : UiStateManager<MutableList<WallPaperDataSafe>>
+
+    suspend fun getAllWallPaper() : UiStateManager<MutableList<WallPaperDataSafe>>
+
+    suspend fun deleteWallpaperFromDatabase(wallPaperDataSafe: WallPaperDataSafe) : UiStateManager<MutableList<WallPaperDataSafe>>
+
 }

@@ -19,12 +19,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.decagon.n26_p3_usecase.R
-import com.decagon.n26_p3_usecase.commons.utils.GenericDialogueBuilder
 import com.decagon.n26_p3_usecase.commons.ui.hideView
 import com.decagon.n26_p3_usecase.commons.ui.showView
 import com.decagon.n26_p3_usecase.commons.ui.toast
-import com.decagon.n26_p3_usecase.core.presentation.MainActivity
+import com.decagon.n26_p3_usecase.commons.utils.GenericDialogueBuilder
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
+import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.decagon.n26_p3_usecase.databinding.FragmentListBinding
 import com.decagon.n26_p3_usecase.features.todo.model.TodoData
 import com.decagon.n26_p3_usecase.features.todo.presentation.adapter.SwipeToDeleteLeft
@@ -36,7 +36,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.LandingAnimator
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -55,7 +54,8 @@ class ListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
@@ -75,28 +75,31 @@ class ListFragment : Fragment() {
 //        verifyExit()
     }
 
-    private fun setOnClickListeners(){
+    private fun setOnClickListeners() {
         binding.searchBottomLayout.setOnClickListener {
-            if (binding.searchBar.isVisible){
+            if (binding.searchBar.isVisible) {
                 binding.searchBar.hideView()
             } else {
                 binding.searchBar.showView()
-
             }
 
             binding.etSearch.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {}
                 override fun beforeTextChanged(
-                    s: CharSequence, start: Int,
-                    count: Int, after: Int
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
                 ) {
                 }
 
                 override fun onTextChanged(
-                    s: CharSequence, start: Int,
-                    before: Int, count: Int
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int
                 ) {
-                    if (s.isNotEmpty()){
+                    if (s.isNotEmpty()) {
                         searchTodo(s.toString())
                     }
                 }
@@ -124,7 +127,7 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun observeLiveData(){
+    private fun observeLiveData() {
         todoViewModel.todoList.observe(viewLifecycleOwner) {
 
             when (it.isNotEmpty()) {
@@ -141,11 +144,11 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun setUpRecyclerView(){
+    private fun setUpRecyclerView() {
         val recyclerView = binding.toToRecyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        recyclerView.itemAnimator  = LandingAnimator().apply {
+        recyclerView.itemAnimator = LandingAnimator().apply {
             addDuration = 300
         }
 
@@ -179,7 +182,7 @@ class ListFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    private fun restoreDeletedTodo(view : View, deletedItem : TodoData, position : Int) {
+    private fun restoreDeletedTodo(view: View, deletedItem: TodoData, position: Int) {
         val snackbar = Snackbar.make(view, "Undo Delete", Snackbar.LENGTH_LONG)
         snackbar.setAction("UNDO") {
             todoViewModel.addToDB(deletedItem)
@@ -195,53 +198,55 @@ class ListFragment : Fragment() {
         observeLiveData()
     }
 
-    private fun inflateBottomSheet(){
+    private fun inflateBottomSheet() {
 
-                val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogStyle)
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogStyle)
 
-                val bottomSheetView: View = layoutInflater.inflate(
-                    R.layout.sort_bottom_sheet,
-                    view?.findViewById(R.id.sort_bottom_sheet_root_layout) as LinearLayout?
-                )
+        val bottomSheetView: View = layoutInflater.inflate(
+            R.layout.sort_bottom_sheet,
+            view?.findViewById(R.id.sort_bottom_sheet_root_layout) as LinearLayout?
+        )
 
-                val highPriorityButton: RadioButton? = bottomSheetView.findViewById(R.id.high_priority_radio_button)
+        val highPriorityButton: RadioButton? = bottomSheetView.findViewById(R.id.high_priority_radio_button)
 
-                val lowPriorityButton: RadioButton? = bottomSheetView.findViewById(R.id.low_priority_radio_button)
+        val lowPriorityButton: RadioButton? = bottomSheetView.findViewById(R.id.low_priority_radio_button)
 
-                lowPriorityButton?.setOnClickListener {
-                    if (sharedPreference.loadFromSharedPref<Boolean>("Boolean", "sortedByDesc")) {
-                        todoViewModel.sortByLowPriority.observe(viewLifecycleOwner) { adapter.setTodos(it) }
-                        sharedPreference.saveToSharedPref("sortedByDesc", false)
-                    } else {
-                        toast(requireContext(), "Already sorted by LOW Priority")
-                    }
-
-                    dialog.dismiss()
-                }
-
-                highPriorityButton?.setOnClickListener {
-                    if (sharedPreference.loadFromSharedPref<Boolean>("Boolean", "sortedByDesc")) {
-                        toast(requireContext(), "Already sorted by HIGH Priority")
-                    } else {
-                        todoViewModel.sortByHighPriority.observe(viewLifecycleOwner) { adapter.setTodos(it) }
-                        sharedPreference.saveToSharedPref("sortedByDesc", true)
-                    }
-                    dialog.dismiss()
-                }
-
-                dialog.setContentView(bottomSheetView)
-                dialog.show()
+        lowPriorityButton?.setOnClickListener {
+            if (sharedPreference.loadFromSharedPref<Boolean>("Boolean", "sortedByDesc")) {
+                todoViewModel.sortByLowPriority.observe(viewLifecycleOwner) { adapter.setTodos(it) }
+                sharedPreference.saveToSharedPref("sortedByDesc", false)
+            } else {
+                toast(requireContext(), "Already sorted by LOW Priority")
             }
 
+            dialog.dismiss()
+        }
+
+        highPriorityButton?.setOnClickListener {
+            if (sharedPreference.loadFromSharedPref<Boolean>("Boolean", "sortedByDesc")) {
+                toast(requireContext(), "Already sorted by HIGH Priority")
+            } else {
+                todoViewModel.sortByHighPriority.observe(viewLifecycleOwner) { adapter.setTodos(it) }
+                sharedPreference.saveToSharedPref("sortedByDesc", true)
+            }
+            dialog.dismiss()
+        }
+
+        dialog.setContentView(bottomSheetView)
+        dialog.show()
+    }
+
     private fun confirmRemoval() {
-        GenericDialogueBuilder.showDialogue(requireContext(), R.style.Theme_AppCompat_Dialog_Alert,
+        GenericDialogueBuilder.showDialogue(
+            requireContext(), R.style.Theme_AppCompat_Dialog_Alert,
             "Are you sure you want to delete all the todos?",
             "Delete All",
             R.drawable.ic_delete,
             "Delete All",
             "Cancel",
             { todoViewModel.deleteAllTodo() },
-            { toast(requireContext(), "Cancelled") })
+            { toast(requireContext(), "Cancelled") }
+        )
     }
 
     fun hideKeyboard() {
@@ -259,18 +264,18 @@ class ListFragment : Fragment() {
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    GenericDialogueBuilder.showDialogue(requireContext(), R.style.Theme_AppCompat_Dialog_Alert,
+                    GenericDialogueBuilder.showDialogue(
+                        requireContext(), R.style.Theme_AppCompat_Dialog_Alert,
                         "Are you sure you want to exit?",
                         "Exit",
                         R.drawable.ic_baseline_logout_24,
                         "Exit",
                         "Cancel",
                         { activity?.finish() },
-                        { toast(requireContext(), "Cancelled") })
+                        { toast(requireContext(), "Cancelled") }
+                    )
                 }
-            })
-
+            }
+        )
     }
-
 }
-

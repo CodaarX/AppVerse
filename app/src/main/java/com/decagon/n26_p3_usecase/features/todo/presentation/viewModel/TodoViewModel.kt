@@ -11,6 +11,10 @@ import javax.inject.Inject
 @HiltViewModel
 class TodoViewModel @Inject constructor(val repository: TodoRepository) : ViewModel() {
 
+    // db
+
+
+
     private val _todoList : MutableLiveData<List<TodoData>> = MutableLiveData()
     val todoList : LiveData<List<TodoData>> = _todoList
 

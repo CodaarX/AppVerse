@@ -5,13 +5,13 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.PorterDuff
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.*
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import com.decagon.n26_p3_usecase.commons.utils.*
-import dagger.hilt.android.AndroidEntryPoint
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
@@ -19,17 +19,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.decagon.n26_p3_usecase.R
+import com.decagon.n26_p3_usecase.commons.utils.Tools
 import com.decagon.n26_p3_usecase.core.data.preferences.SharedPreference
 import com.decagon.n26_p3_usecase.databinding.ActivityMainBinding
-import com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.TrackLocationActivity
-import com.example.mike_utils.MikeNetworkLiveData
-import com.example.mike_utils.MikePermission
-import com.example.mike_utils.MikeUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.jar.Manifest
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -59,14 +55,12 @@ class MainActivity : AppCompatActivity() {
         initNavigationMenu()
         initNavController()
 
-
 //      Color.BLUE
 //      val bar: android.app.ActionBar? = actionBar
 //      bar?.setBackgroundDrawable(ColorDrawable(Color.rgb(19,48,81)))
 //      supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(android.R.color.black)));
 //      supportActionBar?.hide()
     }
-
 
     private fun initToolbar() {
         toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
@@ -105,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     private fun initNavController() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-            navController = navHostFragment.navController
+        navController = navHostFragment.navController
     }
 
     private fun navigateTo(destination: Int, bundle: Bundle? = null) {
@@ -176,13 +170,14 @@ class MainActivity : AppCompatActivity() {
 
     fun onMenuClick(view: View?) {
         when (view) {
-            binding?.barCodeFeature -> navigateTo(R.id.qr_navigator)
+//            binding?.barCodeFeature -> navigateTo(R.id.qr_navigator)
+
             binding?.todoFeature -> navigateTo(R.id.todo_navigation)
             binding?.jokeFeature -> navigateTo(R.id.jokes_navigator)
             binding?.mapFeature -> navigateTo(R.id.locationFragment)
             binding?.wallpaperFeature -> navigateTo(R.id.wallPaperFragment)
             binding?.runningTrackerFeature -> {
-                if (sharedPreference.loadFromSharedPref("Boolean", "runner_set")){
+                if (sharedPreference.loadFromSharedPref("Boolean", "runner_set")) {
                     navigateTo(R.id.run_tracker_navigator)
                 } else {
                     navigateTo(R.id.setUpFragment)
@@ -204,5 +199,4 @@ class MainActivity : AppCompatActivity() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
-
 }

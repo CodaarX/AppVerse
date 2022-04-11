@@ -1,4 +1,4 @@
-package com.decagon.n26_p3_usecase.app
+package com.decagon.n26_p3_usecase.core.di.app
 
 import android.app.Application
 import com.decagon.n26_p3_usecase.commons.utils.NetworkLiveData

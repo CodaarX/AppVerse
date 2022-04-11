@@ -3,7 +3,6 @@ package com.decagon.n26_p3_usecase.features.locationTracker.utils
 import android.app.Activity
 import android.content.Context
 import android.content.IntentSender
-import com.decagon.n26_p3_usecase.core.presentation.MainActivity
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -13,6 +12,7 @@ object LocationProvider {
     fun provide(context: Context, activity: Activity) {
 
         val locationRequest: LocationRequest = LocationRequest.create()
+
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = TrackingUtils.LOCATION_UPDATE_INTERVAL
         locationRequest.fastestInterval = TrackingUtils.FASTEST_LOCATION_UPDATE_INTERVAL
@@ -51,5 +51,4 @@ object LocationProvider {
             }
         }
     }
-
 }

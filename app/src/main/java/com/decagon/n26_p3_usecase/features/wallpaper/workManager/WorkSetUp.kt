@@ -1,4 +1,4 @@
-package com.decagon.n26_p3_usecase.features.locateMe.workManager
+package com.decagon.n26_p3_usecase.features.wallpaper.workManager
 
 import androidx.work.*
 import com.decagon.n26_p3_usecase.commons.utils.NetworkLiveData.application

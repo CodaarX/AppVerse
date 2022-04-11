@@ -15,35 +15,33 @@ import com.karumi.dexter.listener.single.PermissionListener
 
 class GetPermission {
 
-        fun initialize(permission : String, context: Context, message : String) {
+    fun initialize(permission: String, context: Context, message: String) {
 
-            Dexter.withContext(context)
-                .withPermission(permission)
-                .withListener(object : PermissionListener {
-                    @RequiresApi(Build.VERSION_CODES.R)
-                    override fun onPermissionGranted(response: PermissionGrantedResponse) { /* ... */
+        Dexter.withContext(context)
+            .withPermission(permission)
+            .withListener(object : PermissionListener {
+                @RequiresApi(Build.VERSION_CODES.R)
+                override fun onPermissionGranted(response: PermissionGrantedResponse) { /* ... */
+                }
 
-                    }
+                override fun onPermissionDenied(response: PermissionDeniedResponse) { /* ... */
+                    DialogOnDeniedPermissionListener.Builder
+                        .withContext(context)
+                        .withTitle("Permission")
+                        .withMessage(message)
+                        .withButtonText(android.R.string.ok)
+                        .withIcon(R.drawable.ic_baseline_message_24)
+                        .build()
 
-                    override fun onPermissionDenied(response: PermissionDeniedResponse) { /* ... */
-                        DialogOnDeniedPermissionListener.Builder
-                            .withContext(context)
-                            .withTitle("Permission")
-                            .withMessage(message)
-                            .withButtonText(android.R.string.ok)
-                            .withIcon(R.drawable.ic_baseline_message_24)
-                            .build()
+                    toast(context, "Permission is required to use this feature")
+                }
 
-                            toast(context, "Permission is required to use this feature")
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                        permission: PermissionRequest,
-                        token: PermissionToken
-                    ) { /* ... */
-                        token.continuePermissionRequest()
-                    }
-                }).check()
-
-        }
+                override fun onPermissionRationaleShouldBeShown(
+                    permission: PermissionRequest,
+                    token: PermissionToken
+                ) { /* ... */
+                    token.continuePermissionRequest()
+                }
+            }).check()
+    }
 }
