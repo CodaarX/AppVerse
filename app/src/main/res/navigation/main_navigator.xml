@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/programmingJokesFragment"
-        android:name="com.decagon.n26_p3_usecase.features.programmingJokes.presentation.viewController.ProgrammingJokesFragment"
+        android:name="com.michael.appverse.features.programmingJokes.presentation.viewController.ProgrammingJokesFragment"
         android:label="fragment_programming_jokes"
         tools:layout="@layout/fragment_programming_jokes" >
         <action
@@ -26,17 +26,17 @@
     <include app:graph="@navigation/run_tracker_navigator" />
     <fragment
         android:id="@+id/setUpFragment"
-        android:name="com.decagon.n26_p3_usecase.features.locationTracker.presentation.viewController.SetUpFragment"
+        android:name="com.michael.appverse.features.locationTracker.presentation.viewController.SetUpFragment"
         android:label="fragment_set_up"
         tools:layout="@layout/fragment_set_up" />
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.decagon.n26_p3_usecase.features.locateMe.presentation.LocationFragment"
+        android:name="com.michael.appverse.features.locateMe.presentation.LocationFragment"
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/wallPaperFragment"
-        android:name="com.decagon.n26_p3_usecase.features.wallpaper.presentation.viewController.WallPaperFragment"
+        android:name="com.michael.appverse.features.wallpaper.presentation.viewController.WallPaperFragment"
         android:label="fragment_wall_paper"
         tools:layout="@layout/fragment_wall_paper" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteWallPaperFragment"
-        android:name="com.decagon.n26_p3_usecase.features.wallpaper.presentation.viewController.FavouriteWallPaperFragment"
+        android:name="com.michael.appverse.features.wallpaper.presentation.viewController.FavouriteWallPaperFragment"
         android:label="fragment_favourite_wall_paper"
         tools:layout="@layout/fragment_favourite_wall_paper" />
 

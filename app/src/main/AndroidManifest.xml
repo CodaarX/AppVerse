@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.decagon.n26_p3_usecase">
+    package="com.michael.appverse">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
-        android:name=".core.di.app.MainApplication"
+        android:name="com.michael.appverse.core.di.app.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
@@ -39,24 +39,24 @@
             android:name=".LocationActivity"
             android:exported="false" />
         <activity
-            android:name=".features.locationTracker.presentation.viewController.TrackLocationActivity"
+            android:name="com.michael.appverse.features.locationTracker.presentation.viewController.TrackLocationActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".features.todo.presentation.viewController.TodoActivity"
+            android:name="com.michael.appverse.features.todo.presentation.viewController.TodoActivity"
             android:exported="false" />
         <activity
-            android:name=".core.baseClasses.BaseActivity"
+            android:name="com.michael.appverse.core.baseClasses.BaseActivity"
             android:exported="true" />
         <activity
-            android:name=".features.qrCode.QRCodeActivity"
+            android:name="com.michael.appverse.features.qrCode.QRCodeActivity"
             android:exported="true" />
         <activity
-            android:name=".core.presentation.MainActivity"
+            android:name="com.michael.appverse.core.presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name=".features.splashScreen.SplashScreenActivity"
+            android:name="com.michael.appverse.features.splashScreen.SplashScreenActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:launchMode="singleTask"
@@ -77,7 +77,7 @@
         </receiver>
 
         <service
-            android:name=".features.locationTracker.services.TrackingService"
+            android:name="com.michael.appverse.features.locationTracker.services.TrackingService"
             android:foregroundServiceType="location" />
 
         <meta-data

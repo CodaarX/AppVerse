@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.decagon.n26_p3_usecase.features.todo.presentation.viewController.ListFragment"
+        android:name="com.michael.appverse.features.todo.presentation.viewController.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTodoFragment"
-        android:name="com.decagon.n26_p3_usecase.features.todo.presentation.viewController.AddTodoFragment"
+        android:name="com.michael.appverse.features.todo.presentation.viewController.AddTodoFragment"
         android:label="fragment_add_todo"
         tools:layout="@layout/fragment_add_todo" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.decagon.n26_p3_usecase.features.todo.presentation.viewController.UpdateFragment"
+        android:name="com.michael.appverse.features.todo.presentation.viewController.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" >
         <action
@@ -46,6 +46,6 @@
             app:exitAnim="@anim/to_left" />
         <argument
             android:name="currentItem"
-            app:argType="com.decagon.n26_p3_usecase.features.todo.model.TodoData" />
+            app:argType="com.michael.appverse.features.todo.model.TodoData" />
     </fragment>
 </navigation>
